@@ -31,7 +31,7 @@ function UserList(props) {
               </td>
               <td>{user.id}</td>
               <td>
-                <Link to={"/user/" + user.id || ""}>{user.name}</Link>
+                <Link to={"/user/" + user.id || ""}>{user.userName}</Link>
               </td>
               <td>{user.accountType}</td>
               <td>{new Date(user.userSince).toDateString()}</td>

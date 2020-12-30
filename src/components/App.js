@@ -1,17 +1,20 @@
 import "bootstrap/dist/css/bootstrap.css";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "./common/Header";
 import Footer from "./common/Footer";
 import HomePage from "./HomePage";
 import AdminPage from "./AdminPage";
+import LoginPage from "./LoginPage";
 
 function App() {
   return (
     <div className="container-fluid">
       <Header />
       <Switch>
-        <Route path="/" exact component={HomePage} />
+        <Route path="/" exact component={LoginPage} />
         <Route path="/admin" component={AdminPage} />
+        <Route path="/user/:id" component={HomePage} />
+        <Route path="/user" component={HomePage} />
       </Switch>
       <Footer />
     </div>

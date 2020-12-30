@@ -131,7 +131,8 @@
   ],
   "users": [
     {
-      "name": "Nick",
+      "userName": "Nick",
+      "password": "password",
       "accountType": "admin",
       "id": "1234",
       "userSince": "2010-05-23T18:25:43.511Z"
