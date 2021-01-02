@@ -1,23 +1,23 @@
 import React from "react";
 
 function JournalEntriesList(props) {
-  return (
-    <>
-      <table className="table">
-        <tbody>
-          {props.journalEntries.map((journalEntry) => {
-            return (
-              <tr key={journalEntry.id}>
-                <td>Type: {journalEntry.type}</td>
-                <td>Date: {new Date(journalEntry.date).toDateString()}</td>
-                <td>{journalEntry.notes}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </>
-  );
+  function EntryList(props) {
+    debugger;
+    return (
+      <li>
+        <div>{new Date(props.value.date).toDateString()}</div>
+        <div>{props.value.type}</div>
+        <div>{props.value.notes}</div>
+      </li>
+    );
+  }
+
+  const entryList = props.journalEntries.map((entry) => {
+    debugger;
+    return <EntryList key={entry.id.toString()} value={entry}></EntryList>;
+  });
+
+  return <ul>{entryList}</ul>;
 }
 
 export default JournalEntriesList;
