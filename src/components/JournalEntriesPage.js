@@ -5,13 +5,12 @@ import JournalEntriesList from "./JournalEntriesList";
 
 function JournalEntriesPage(props) {
   const [journalEntries, setJournalEntries] = useState(
-    journalEntryStore.getJournalEntries(props.match.params.id)
+    journalEntryStore.getJournalEntries(props.match.params.userId)
   );
 
   useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
-    const userId = props.match.params.id;
-    debugger;
+    const userId = props.match.params.userId;
     if (journalEntryStore.getJournalEntries(userId) === 0)
       journalEntryActions.loadJournalEntries(userId);
     return () => journalEntryStore.removeChangeListener(onChange);
@@ -19,7 +18,7 @@ function JournalEntriesPage(props) {
 
   function onChange() {
     setJournalEntries(
-      journalEntryStore.getJournalEntries(props.match.params.id)
+      journalEntryStore.getJournalEntries(props.match.params.userId)
     );
   }
 

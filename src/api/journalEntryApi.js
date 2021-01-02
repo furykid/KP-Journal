@@ -24,3 +24,11 @@ export function deleteJournalEntry(userId, journalEntryId) {
     .then(handleResponse)
     .catch(handleError);
 }
+
+export function getJournalEntry(entryId) {
+  return fetch(baseUrl + "?id=" + entryId, {
+    method: "GET",
+  })
+    .then(handleResponse)
+    .catch(handleError);
+}

@@ -42,7 +42,6 @@ Dispatcher.register((action) => {
       store.emitChange();
       break;
     case actionTypes.DELETE_USER:
-      debugger;
       _users = _users.filter((user) => user.id !== ~~action.id);
       store.emitChange();
       break;

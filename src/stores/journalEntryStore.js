@@ -19,10 +19,13 @@ class JournalEntryStore extends EventEmitter {
   }
 
   getJournalEntries(_userId) {
-    let temp = _journalEntries.filter(
+    return _journalEntries.filter(
       (entry) => _userId === entry.userId.toString()
     );
-    return temp;
+  }
+
+  getJournalEntry(entryId) {
+    return _journalEntries.find((entry) => entry.id === entryId);
   }
 }
 
@@ -32,6 +35,9 @@ Dispatcher.register((action) => {
   switch (action.actionType) {
     case actionTypes.CREATE_JOURNAL_ENTRY:
       _journalEntries.push(action.journalEntry);
+      store.emitChange();
+      break;
+    case actionTypes.GET_JOURNAL_ENTRY:
       store.emitChange();
       break;
     case actionTypes.LOAD_JOURNAL_ENTRIES:

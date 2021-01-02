@@ -3,6 +3,8 @@ import * as journalEntryActions from "../actions/journalEntryActions";
 import journalEntryStore from "../stores/journalEntryStore";
 import { NavbarBrand } from "reactstrap";
 
+let _total = 0;
+
 function Stats(props) {
   const [total, setTotal] = useState(0);
   const [format, setFormat] = useState("");
@@ -13,16 +15,12 @@ function Stats(props) {
   function setTotalWeight() {
     const _entries = journalEntryStore.getJournalEntries(props.userId);
     _entries.forEach((entry) => {
-      setFormat(entry.weightFormat);
-      entry.workout.forEach((workout) => {
-        setTotal(total + workout.weight * workout.reps);
+      if (format === "") setFormat(entry.weightFormat);
+      entry.exercises.forEach((exercise) => {
+        _total += exercise.weight * exercise.reps;
+        setTotal(_total);
       });
     });
-  }
-
-  function onChange() {
-    setJournalEntries(journalEntryStore.getJournalEntries(props.userId));
-    setTotalWeight();
   }
 
   useEffect(() => {
@@ -32,6 +30,11 @@ function Stats(props) {
     }
     return () => journalEntryStore.removeChangeListener(onChange);
   }, [props.userId, journalEntries.length]);
+
+  function onChange() {
+    setJournalEntries(journalEntryStore.getJournalEntries(props.userId));
+    setTotalWeight();
+  }
 
   return (
     <>

@@ -34,3 +34,12 @@ export function loadJournalEntries(userId) {
     });
   });
 }
+
+export function getJournalEntry(entryId) {
+  return journalEntryApi.getJournalEntry(entryId).then((journalEntry) => {
+    dispatcher.dispatch({
+      actionType: actionTypes.GET_JOURNAL_ENTRY,
+      journalEntry: journalEntry,
+    });
+  });
+}

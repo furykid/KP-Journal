@@ -1,23 +1,37 @@
 import React from "react";
+import {
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+} from "reactstrap";
 
 function JournalEntriesList(props) {
-  function EntryList(props) {
-    debugger;
-    return (
-      <li>
-        <div>{new Date(props.value.date).toDateString()}</div>
-        <div>{props.value.type}</div>
-        <div>{props.value.notes}</div>
-      </li>
-    );
-  }
-
-  const entryList = props.journalEntries.map((entry) => {
-    debugger;
-    return <EntryList key={entry.id.toString()} value={entry}></EntryList>;
-  });
-
-  return <ul>{entryList}</ul>;
+  return (
+    <>
+      <div>
+        {props.journalEntries.map((entry) => {
+          return (
+            <ListGroup key={entry.id}>
+              <ListGroupItem
+                tag="a"
+                href={"/user/" + entry.userId + "/journalEntries/" + entry.id}
+                action
+              >
+                <ListGroupItemHeading>
+                  {new Date(entry.date).toDateString()}
+                </ListGroupItemHeading>
+                <ListGroupItemText className="border border-warning">
+                  {entry.tag}
+                </ListGroupItemText>
+                <ListGroupItemText>{entry.notes}</ListGroupItemText>
+              </ListGroupItem>
+            </ListGroup>
+          );
+        })}
+      </div>
+    </>
+  );
 }
 
 export default JournalEntriesList;
