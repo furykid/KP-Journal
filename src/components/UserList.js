@@ -21,10 +21,7 @@ function UserList(props) {
               <td>
                 <button
                   className="btn btn-outline-danger"
-                  onClick={() => {
-                    props.deleteUser(user.id);
-                    props.onChange();
-                  }}
+                  onClick={() => props.deleteUser(user.id)}
                 >
                   Delete
                 </button>
@@ -47,8 +44,8 @@ UserList.propTypes = {
   deleteUser: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      userName: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

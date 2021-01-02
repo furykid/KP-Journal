@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import UserList from "./UserList";
 import { Link } from "react-router-dom";
-import { getUsers, deleteUser } from "../api/userApi";
+import userStore from "../stores/userStore";
+import { loadUsers, deleteUser } from "../actions/userActions";
 
-function UsersPage() {
-  const [users, setUsers] = useState([]);
+function AdminPage() {
+  const [users, setUsers] = useState(userStore.getUsers());
 
   useEffect(() => {
-    if (users.length === 0) {
-      getUsers().then((_users) => {
-        setUsers(_users);
-      });
-    }
-  }, [users.length]);
+    userStore.addChangeListener(onChange);
+    if (userStore.getUsers().length === 0) loadUsers();
+    return () => userStore.removeChangeListener(onChange);
+  }, []);
 
-  function handleChange() {
-    getUsers().then((_users) => {
-      setUsers(_users);
-    });
+  function onChange() {
+    setUsers(userStore.getUsers());
   }
 
   return (
@@ -27,9 +24,9 @@ function UsersPage() {
       <Link className="btn btn-primary" to="/user">
         Add New User
       </Link>
-      <UserList users={users} deleteUser={deleteUser} onChange={handleChange} />
+      <UserList users={users} deleteUser={deleteUser} />
     </>
   );
 }
 
-export default UsersPage;
+export default AdminPage;

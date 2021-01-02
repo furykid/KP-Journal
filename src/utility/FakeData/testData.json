@@ -1,8 +1,9 @@
 {
   "journalEntries": [
     {
+      "id": 1,
       "date": "2020-05-23T18:25:43.511Z",
-      "userId": "1234",
+      "userId": 0,
       "type": "snatch",
       "weightFormat": "kg",
       "notes": "Everything felt great",
@@ -135,14 +136,14 @@
       "userName": "Nick",
       "password": "password",
       "accountType": "admin",
-      "id": "1234",
+      "id": 0,
       "userSince": "2010-05-23T18:25:43.511Z"
     },
     {
       "userName": "Test User",
       "password": "abc123",
       "accountType": "free",
-      "id": "5678",
+      "id": 1,
       "userSince": "2019-05-23T18:25:43.511Z"
     }
   ]
