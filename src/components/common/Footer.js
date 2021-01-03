@@ -1,14 +1,13 @@
 import React from "react";
-import { Navbar, NavbarBrand } from "reactstrap";
+import { Navbar } from "reactstrap";
 import Stats from "../../utility/Stats";
 
-function Footer() {
+function Footer(props) {
   return (
     <>
-      <div className="fixed-bottom">
-        <Navbar color="dark" dark>
-          <NavbarBrand>Footer Stuff</NavbarBrand>
-          <Stats userId="0" />
+      <div className="navbar fixed-bottom justify-content-end">
+        <Navbar className="rounded-pill" color="dark" dark>
+          <Stats exercises={props.exercises} format={props.format} />
         </Navbar>
       </div>
     </>

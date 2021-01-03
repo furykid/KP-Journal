@@ -12,21 +12,30 @@ function JournalEntriesList(props) {
       <div>
         {props.journalEntries.map((entry) => {
           return (
-            <ListGroup key={entry.id}>
-              <ListGroupItem
-                tag="a"
-                href={"/user/" + entry.userId + "/journalEntries/" + entry.id}
-                action
-              >
-                <ListGroupItemHeading>
-                  {new Date(entry.date).toDateString()}
-                </ListGroupItemHeading>
-                <ListGroupItemText className="border border-warning">
-                  {entry.tag}
-                </ListGroupItemText>
-                <ListGroupItemText>{entry.notes}</ListGroupItemText>
-              </ListGroupItem>
-            </ListGroup>
+            <div className="container-sm">
+              <ListGroup key={entry.id}>
+                <div>&nbsp;</div>
+                <ListGroupItem
+                  tag="a"
+                  href={"/user/" + entry.userId + "/journalEntries/" + entry.id}
+                  action
+                >
+                  <ListGroupItemHeading>
+                    {new Date(entry.date).toDateString()}
+                  </ListGroupItemHeading>
+                  <ListGroupItemText className="btn btn-warning disabled">
+                    {entry.tag}
+                  </ListGroupItemText>
+                  <ListGroupItemText>
+                    calories: {entry.calories}
+                  </ListGroupItemText>
+                  <ListGroupItemText>
+                    sleep: {entry.sleep} hours
+                  </ListGroupItemText>
+                  <ListGroupItemText>notes: {entry.notes}</ListGroupItemText>
+                </ListGroupItem>
+              </ListGroup>
+            </div>
           );
         })}
       </div>

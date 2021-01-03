@@ -25,7 +25,7 @@ class JournalEntryStore extends EventEmitter {
   }
 
   getJournalEntry(entryId) {
-    return _journalEntries.find((entry) => entry.id === entryId);
+    return _journalEntries.find((entry) => entry.id === ~~entryId);
   }
 }
 

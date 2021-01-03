@@ -12,7 +12,7 @@ function Header() {
             <NavLink activeStyle={activeStyle} exact to="/">
               Home
             </NavLink>
-            {" | "}
+            {" - "}
             <NavLink activeStyle={activeStyle} to="/admin">
               Admin
             </NavLink>

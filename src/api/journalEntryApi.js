@@ -26,9 +26,7 @@ export function deleteJournalEntry(userId, journalEntryId) {
 }
 
 export function getJournalEntry(entryId) {
-  return fetch(baseUrl + "?id=" + entryId, {
-    method: "GET",
-  })
+  return fetch(baseUrl + "?id=" + entryId)
     .then(handleResponse)
     .catch(handleError);
 }

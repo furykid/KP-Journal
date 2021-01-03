@@ -10,11 +10,12 @@ function JournalEntriesPage(props) {
 
   useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
+    debugger;
     const userId = props.match.params.userId;
-    if (journalEntryStore.getJournalEntries(userId) === 0)
+    if (journalEntryStore.getJournalEntries(userId).length === 0)
       journalEntryActions.loadJournalEntries(userId);
     return () => journalEntryStore.removeChangeListener(onChange);
-  });
+  }, [props.match.params.userId]);
 
   function onChange() {
     setJournalEntries(
@@ -24,8 +25,9 @@ function JournalEntriesPage(props) {
 
   return (
     <>
-      <h1>Journal Entries</h1>
-      <JournalEntriesList journalEntries={journalEntries} />
+      <div>&nbsp;</div>
+      <h1 className="text-center">Journal Entries</h1>
+      <JournalEntriesList journalEntries={journalEntries || []} />
     </>
   );
 }

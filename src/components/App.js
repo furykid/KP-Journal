@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { Route, Switch } from "react-router-dom";
 import Header from "./common/Header";
-import Footer from "./common/Footer";
 import HomePage from "./HomePage";
 import AdminPage from "./AdminPage";
 import LoginPage from "./LoginPage";
@@ -22,7 +21,6 @@ function App() {
         <Route path="/user/:userId" component={JournalEntriesPage} />
         <Route path="/user" component={HomePage} />
       </Switch>
-      <Footer />
     </div>
   );
 }

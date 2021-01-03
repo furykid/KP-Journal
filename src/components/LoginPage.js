@@ -22,7 +22,7 @@ function LoginPage(props) {
     // TEST CODE
     // submit login here
     console.log(`User info submitted: ${userName} ${password}`);
-    props.history.push("/user/1234");
+    props.history.push("/user/0");
   }
 
   return (

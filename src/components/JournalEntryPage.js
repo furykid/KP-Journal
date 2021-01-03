@@ -1,44 +1,37 @@
 import React, { useState, useEffect } from "react";
-import * as journalEntryActions from "../actions/journalEntryActions";
+import Footer from "../components/common/Footer";
 import journalEntryStore from "../stores/journalEntryStore";
+import * as journalEntryActions from "../actions/journalEntryActions";
+import JournalEntry from "./JournalEntry";
 
 function JournalEntryPage(props) {
-  const [journalEntries, setJournalEntries] = useState(
-    journalEntryStore.getJournalEntries(props.match.params.userId)
-  );
-  const [journalEntry, setJournalEntry] = useState(
-    journalEntryActions.getJournalEntry(props.match.params.entryId)
-  );
+  const [journalEntry, setJournalEntry] = useState({});
 
   useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
-    debugger;
-    if (!journalEntry)
-      journalEntryActions.getJournalEntry(props.match.params.entryId);
     let userId = props.match.params.userId;
-    if (journalEntryStore.getJournalEntries(userId).length === 0)
+    if (journalEntryStore.getJournalEntries(userId).length === 0) {
       journalEntryActions.loadJournalEntries(userId);
+    }
     return () => journalEntryStore.removeChangeListener(onChange);
-  }, [journalEntry, props.match.params.entryId, props.match.params.userId]);
+  }, [props.match.params.userId]);
 
   function onChange() {
-    debugger;
-    setJournalEntries(
-      journalEntryStore.getJournalEntries(props.match.params.userId)
-    );
-    setJournalEntry(
-      journalEntryStore.getJournalEntry(props.match.params.entryId)
-    );
+    let entry = journalEntryStore.getJournalEntry(props.match.params.entryId);
+    setJournalEntry(entry);
   }
 
   return (
     <>
-      <h1>Journal Entry</h1>
-      <div>{journalEntry.id || ""}</div>
-      <p>
-        Create a Journal Entry module here. We will want to have other things on
-        this page anyway.
-      </p>
+      <div>&nbsp;</div>
+      <h1 className="text-center">
+        Journal entry for {new Date(journalEntry.date).toDateString()}
+      </h1>
+      <JournalEntry exercises={journalEntry.exercises || []} />
+      <Footer
+        exercises={journalEntry.exercises || []}
+        format={journalEntry.weightFormat || ""}
+      />
     </>
   );
 }
