@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import TextInput from "./common/TextInput";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function LoginPage(props) {
-  const [errors, setErrors] = useState({});
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function formIsValid() {
-    const _errors = {};
-    if (!userName) _errors.userName = "Username is required";
-    if (!password) _errors.password = "Password is required";
-
-    setErrors(_errors);
-    return Object.keys(_errors).length === 0;
+    return email.length > 0 && password.length > 0;
   }
 
   function handleSubmit(event) {
@@ -21,37 +18,43 @@ function LoginPage(props) {
 
     // TEST CODE
     // submit login here
-    console.log(`User info submitted: ${userName} ${password}`);
+    console.log(`User info submitted: ${email} ${password}`);
     props.history.push("/user/0");
   }
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <TextInput
-              id="userName"
-              name="userName"
-              label="User Name"
-              onChange={(event) => setUserName(event.target.value)}
-              value={userName}
-              error={errors.userName}
-            />
-            <input
-              name="password"
-              type="password"
-              label="Password"
-              id="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
-          <input type="submit" value="Login" className="btn btn-primary" />
-        </form>
-      </div>
-    </div>
+    <>
+      <div>&nbsp;</div>
+      <h1 className="text-center">Login Page</h1>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col></Col>
+          <Col>
+            <Form.Group size="lg" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                autoFocus
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group size="lg" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </Form.Group>
+            <Button block size="lg" type="submit" disabled={!formIsValid()}>
+              Login
+            </Button>
+          </Col>
+          <Col></Col>
+        </Row>
+      </Form>
+    </>
   );
 }
 
