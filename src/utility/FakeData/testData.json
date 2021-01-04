@@ -124,7 +124,7 @@
           "set": 8,
           "weight": 65,
           "reps": 2,
-          "pr": false,
+          "pr": true,
           "notes": "Felt heavy"
         },
         {
@@ -235,7 +235,7 @@
           "set": 6,
           "weight": 85,
           "reps": 2,
-          "pr": false,
+          "pr": true,
           "notes": "Felt a bit heavy"
         }
       ]

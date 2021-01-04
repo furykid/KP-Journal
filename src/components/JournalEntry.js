@@ -13,6 +13,7 @@ function JournalEntry(props) {
     <>
       <div className="w-50 p-3 list-inline mx-auto justify-content-center">
         {props.exercises.map((exercise) => {
+          const prStyle = { color: "orange" };
           return (
             <Row>
               <Col></Col>
@@ -20,7 +21,7 @@ function JournalEntry(props) {
                 <ListGroup key={exercise.id}>
                   <div>&nbsp;</div>
                   <ListGroupItem className="bg-light">
-                    <ListGroupItemHeading>
+                    <ListGroupItemHeading style={exercise.pr ? prStyle : {}}>
                       {exercise.exercise}
                     </ListGroupItemHeading>
                     <ListGroupItemText>Set #{exercise.set}</ListGroupItemText>
