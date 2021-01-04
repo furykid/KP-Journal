@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import journalEntryStore from "../stores/journalEntryStore";
 import * as journalEntryActions from "../actions/journalEntryActions";
 import JournalEntriesList from "./JournalEntriesList";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function JournalEntriesPage(props) {
   const [journalEntries, setJournalEntries] = useState(
@@ -25,9 +27,15 @@ function JournalEntriesPage(props) {
 
   return (
     <>
-      <div>&nbsp;</div>
-      <h1 className="text-center">Journal Entries</h1>
-      <JournalEntriesList journalEntries={journalEntries || []} />
+      <Row>
+        <Col></Col>
+        <Col xs={6}>
+          <div>&nbsp;</div>
+          <h1 className="text-center">Journal Entries</h1>
+          <JournalEntriesList journalEntries={journalEntries || []} />
+        </Col>
+        <Col></Col>
+      </Row>
     </>
   );
 }

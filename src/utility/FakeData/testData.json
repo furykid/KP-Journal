@@ -221,6 +221,7 @@
   "users": [
     {
       "userName": "Nick",
+      "email": "furykid777@gmail.com",
       "password": "password",
       "accountType": "admin",
       "id": 0,
@@ -230,6 +231,7 @@
     },
     {
       "userName": "Test User",
+      "email": "test@email.com",
       "password": "abc123",
       "accountType": "free",
       "id": 1,

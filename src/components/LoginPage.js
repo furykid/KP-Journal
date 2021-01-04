@@ -3,8 +3,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useAppContext } from "../libs/contextLib";
 
 function LoginPage(props) {
+  const { userHasAuthenticated } = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +17,7 @@ function LoginPage(props) {
   function handleSubmit(event) {
     event.preventDefault();
     if (!formIsValid()) return;
+    userHasAuthenticated(true);
 
     // TEST CODE
     // submit login here
@@ -25,7 +28,7 @@ function LoginPage(props) {
   return (
     <>
       <div>&nbsp;</div>
-      <h1 className="text-center">Login Page</h1>
+      <h1 className="text-center">Login</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col></Col>

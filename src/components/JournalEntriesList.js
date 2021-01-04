@@ -12,7 +12,7 @@ function JournalEntriesList(props) {
       <div>
         {props.journalEntries.map((entry) => {
           return (
-            <div className="container-sm">
+            <div>
               <ListGroup key={entry.id}>
                 <div>&nbsp;</div>
                 <ListGroupItem
