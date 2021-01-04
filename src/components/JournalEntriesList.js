@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 import {
   ListGroup,
   ListGroupItem,
@@ -23,8 +24,18 @@ function JournalEntriesList(props) {
                   <ListGroupItemHeading>
                     {new Date(entry.date).toDateString()}
                   </ListGroupItemHeading>
-                  <ListGroupItemText className="btn btn-warning disabled">
-                    {entry.tag}
+                  <ListGroupItemText>
+                    tags:
+                    {entry.tags.map((tag) => {
+                      return (
+                        <>
+                          {" "}
+                          <Button variant="outline-info" size="sm" disabled>
+                            {tag}
+                          </Button>
+                        </>
+                      );
+                    })}
                   </ListGroupItemText>
                   <ListGroupItemText>
                     calories: {entry.calories}

@@ -4,7 +4,7 @@
       "id": 1,
       "date": "2020-05-23T18:25:43.511Z",
       "userId": 0,
-      "tag": "snatch",
+      "tags": ["snatch"],
       "weightFormat": "kg",
       "sleep": 8,
       "calories": 1500,
@@ -16,6 +16,7 @@
           "set": 1,
           "weight": 40,
           "reps": 1,
+          "pr": false,
           "notes": "Shoulders were a little sore"
         },
         {
@@ -24,6 +25,7 @@
           "set": 2,
           "weight": 50,
           "reps": 1,
+          "pr": false,
           "notes": ""
         },
         {
@@ -32,6 +34,7 @@
           "set": 3,
           "weight": 55,
           "reps": 1,
+          "pr": false,
           "notes": ""
         },
         {
@@ -40,6 +43,7 @@
           "set": 4,
           "weight": 60,
           "reps": 1,
+          "pr": false,
           "notes": ""
         },
         {
@@ -48,6 +52,7 @@
           "set": 5,
           "weight": 65,
           "reps": 1,
+          "pr": false,
           "notes": "Feeling a lot stronger on this set"
         },
         {
@@ -56,6 +61,7 @@
           "set": 1,
           "weight": 40,
           "reps": 2,
+          "pr": false,
           "notes": "Felt a bit choppy, but got better through the reps"
         },
         {
@@ -64,6 +70,7 @@
           "set": 2,
           "weight": 40,
           "reps": 2,
+          "pr": false,
           "notes": "Felt a lot smoother than the first"
         },
         {
@@ -72,6 +79,7 @@
           "set": 3,
           "weight": 40,
           "reps": 2,
+          "pr": false,
           "notes": "Felt amazing"
         },
         {
@@ -80,6 +88,7 @@
           "set": 4,
           "weight": 50,
           "reps": 2,
+          "pr": false,
           "notes": "Felt very smooth"
         },
         {
@@ -88,6 +97,7 @@
           "set": 5,
           "weight": 60,
           "reps": 2,
+          "pr": false,
           "notes": "First one felt a little heavy, but the rest were fine"
         },
         {
@@ -96,6 +106,7 @@
           "set": 6,
           "weight": 65,
           "reps": 2,
+          "pr": false,
           "notes": "Felt good"
         },
         {
@@ -104,6 +115,7 @@
           "set": 7,
           "weight": 65,
           "reps": 2,
+          "pr": false,
           "notes": "Felt good"
         },
         {
@@ -112,6 +124,7 @@
           "set": 8,
           "weight": 65,
           "reps": 2,
+          "pr": false,
           "notes": "Felt heavy"
         },
         {
@@ -120,6 +133,7 @@
           "set": 1,
           "weight": 40,
           "reps": 10,
+          "pr": false,
           "notes": ""
         },
         {
@@ -128,6 +142,7 @@
           "set": 2,
           "weight": 45,
           "reps": 10,
+          "pr": false,
           "notes": ""
         },
         {
@@ -136,6 +151,7 @@
           "set": 3,
           "weight": 50,
           "reps": 5,
+          "pr": false,
           "notes": ""
         },
         {
@@ -144,6 +160,7 @@
           "set": 4,
           "weight": 55,
           "reps": 5,
+          "pr": false,
           "notes": "Felt amazing"
         }
       ]
@@ -152,7 +169,7 @@
       "id": 2,
       "date": "2020-05-24T18:25:43.511Z",
       "userId": 0,
-      "tag": "clean",
+      "tags": ["clean", "test"],
       "weightFormat": "kg",
       "sleep": 7,
       "calories": 1700,
@@ -164,6 +181,7 @@
           "set": 1,
           "weight": 50,
           "reps": 2,
+          "pr": false,
           "notes": "Sluggish start"
         },
         {
@@ -172,6 +190,7 @@
           "set": 2,
           "weight": 50,
           "reps": 2,
+          "pr": false,
           "notes": ""
         },
         {
@@ -180,6 +199,7 @@
           "set": 3,
           "weight": 60,
           "reps": 2,
+          "pr": false,
           "notes": ""
         },
         {
@@ -188,6 +208,7 @@
           "set": 4,
           "weight": 70,
           "reps": 2,
+          "pr": false,
           "notes": ""
         },
         {
@@ -196,6 +217,7 @@
           "set": 5,
           "weight": 75,
           "reps": 2,
+          "pr": false,
           "notes": "Feeling a lot stronger on this set"
         },
         {
@@ -204,6 +226,7 @@
           "set": 6,
           "weight": 80,
           "reps": 2,
+          "pr": false,
           "notes": ""
         },
         {
@@ -212,6 +235,7 @@
           "set": 6,
           "weight": 85,
           "reps": 2,
+          "pr": false,
           "notes": "Felt a bit heavy"
         }
       ]

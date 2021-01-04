@@ -15,7 +15,7 @@ function Stats(props) {
   return (
     <>
       <NavbarBrand>
-        Workout total : {getTotalWeight() || 0} {props.format || ""}
+        Workout volume : {getTotalWeight() || 0} {props.format || ""}
       </NavbarBrand>
     </>
   );
