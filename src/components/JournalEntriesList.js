@@ -25,7 +25,6 @@ function JournalEntriesList(props) {
                     {new Date(entry.date).toDateString()}
                   </ListGroupItemHeading>
                   <ListGroupItemText>
-                    tags:
                     {entry.tags.map((tag) => {
                       return (
                         <>

@@ -15,10 +15,10 @@ function JournalEntry(props) {
         {props.exercises.map((exercise) => {
           const prStyle = { color: "orange" };
           return (
-            <Row>
+            <Row key={exercise.id}>
               <Col></Col>
               <Col xs={10}>
-                <ListGroup key={exercise.id}>
+                <ListGroup>
                   <div>&nbsp;</div>
                   <ListGroupItem className="bg-light">
                     <ListGroupItemHeading style={exercise.pr ? prStyle : {}}>
