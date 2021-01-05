@@ -9,7 +9,7 @@ function Header() {
       <div className="navbar navbar-expand-lg bg-secondary bg-light justify-content-between sticky-top">
         <h1>Kilo Pro - Journal</h1>
         <div>
-          <ul class="navbar-nav mr-auto">
+          <ul className="navbar-nav mr-auto">
             <NavLink activeStyle={activeStyle} exact to="/">
               Home
             </NavLink>
