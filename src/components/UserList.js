@@ -7,7 +7,6 @@ function UserList(props) {
     <table className="table">
       <thead>
         <tr>
-          <th>&nbsp;</th>
           <th>User ID</th>
           <th>User Name</th>
           <th>Account Type</th>
@@ -18,14 +17,6 @@ function UserList(props) {
         {props.users.map((user) => {
           return (
             <tr key={user.id}>
-              <td>
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={() => props.deleteUser(user.id)}
-                >
-                  Delete
-                </button>
-              </td>
               <td>{user.id}</td>
               <td>
                 <Link to={"/user/" + user.id || ""}>{user.userName}</Link>
@@ -41,7 +32,6 @@ function UserList(props) {
 }
 
 UserList.propTypes = {
-  deleteUser: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
