@@ -7,6 +7,7 @@ import AdminPage from "./AdminPage";
 import LoginPage from "./LoginPage";
 import JournalEntriesPage from "./JournalEntriesPage";
 import JournalEntryPage from "./JournalEntryPage";
+import ProtectedRoute from "../Auth/ProtectedRoute";
 
 function App() {
   return (
@@ -14,14 +15,13 @@ function App() {
       <Header />
       <div className="body">
         <Switch>
-          <Route path="/" exact component={LoginPage} />
+          <Route path="/" exact component={HomePage} />
           <Route path="/admin" component={AdminPage} />
-          <Route
+          <ProtectedRoute
             path="/user/:userId/journalEntries/:entryId"
             component={JournalEntryPage}
           />
-          <Route path="/user/:userId" component={JournalEntriesPage} />
-          <Route path="/user" component={HomePage} />
+          <ProtectedRoute path="/user/:userId" component={JournalEntriesPage} />
         </Switch>
       </div>
     </div>
