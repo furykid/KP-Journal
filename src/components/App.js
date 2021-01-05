@@ -6,7 +6,7 @@ import HomePage from "./HomePage";
 import AdminPage from "./AdminPage";
 import JournalEntriesPage from "./JournalEntriesPage";
 import JournalEntryPage from "./JournalEntryPage";
-import ProtectedRoute from "../Auth/ProtectedRoute";
+//import ProtectedRoute from "../Auth/ProtectedRoute";
 
 function App() {
   return (
