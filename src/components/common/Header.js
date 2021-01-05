@@ -1,14 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import AuthenticationButton from "./AuthenticationButton";
 
 function Header() {
   const activeStyle = { color: "orange" };
   return (
     <>
-      <div className="navbar navbar-expand-sm bg-secondary navbar-dark sticky-top">
+      <div className="navbar navbar-expand-lg bg-secondary bg-light justify-content-between sticky-top">
         <h1>Kilo Pro - Journal</h1>
-        <ul>
-          <nav>
+        <div>
+          <ul class="navbar-nav mr-auto">
             <NavLink activeStyle={activeStyle} exact to="/">
               Home
             </NavLink>
@@ -16,8 +17,11 @@ function Header() {
             <NavLink activeStyle={activeStyle} to="/admin">
               Admin
             </NavLink>
-          </nav>
-        </ul>
+          </ul>
+        </div>
+        <span>
+          <AuthenticationButton />
+        </span>
       </div>
     </>
   );
