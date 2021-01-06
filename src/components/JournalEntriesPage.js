@@ -8,16 +8,18 @@ import Col from "react-bootstrap/Col";
 function JournalEntriesPage(props) {
   const [_userId, setUserId] = useState(0);
   const [journalEntries, setJournalEntries] = useState(
-    journalEntryStore.getJournalEntries([])
+    journalEntryStore.getJournalEntries()
   );
 
   useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
-    if (_userId === 0) setUserId(props.match.params.userId);
-    if (journalEntryStore.getJournalEntries().length === 0)
-      loadJournalEntries(_userId);
+    if (_userId !== props.match.params.userId) {
+      debugger;
+      setUserId(props.match.params.userId);
+      loadJournalEntries(props.match.params.userId);
+    }
     return () => journalEntryStore.removeChangeListener(onChange);
-  }, [_userId, props.match.params.userId]);
+  }, [props.match.params.userId, journalEntries.length, _userId]);
 
   function onChange() {
     setJournalEntries(journalEntryStore.getJournalEntries());
