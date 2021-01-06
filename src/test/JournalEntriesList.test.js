@@ -69,7 +69,6 @@ describe("Journal Entries render tests", () => {
       </Router>
     );
 
-    // There should be ONLY 1 table element
     const list = wrapper.find("ul");
     expect(list).toHaveLength(_journalEntries.length);
 
