@@ -14,7 +14,6 @@ function JournalEntriesPage(props) {
   useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
     if (_userId !== props.match.params.userId) {
-      debugger;
       setUserId(props.match.params.userId);
       loadJournalEntries(props.match.params.userId);
     }
