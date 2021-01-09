@@ -40,28 +40,32 @@ function JournalEntryPage(props) {
     journalEntryStore.addChangeListener(onChange);
     let userId = props.match.params.userId;
     let entryId = props.match.params.entryId;
-    if (journalEntryStore.getJournalEntries().length === 0) {
+    if (journalEntries.length === 0) {
       journalEntryActions.loadJournalEntries(userId);
-    }
-    if (entryId) {
-      setJournalEntry(journalEntryStore.getJournalEntry(entryId));
-    }
-    if (journalEntry) {
-      setDate(new Date(journalEntry.date).toDateString());
-      setExercises(journalEntry.exercises);
-      setWeightFormat(journalEntry.weightFormat);
+    } else if (entryId) {
+      let entry = journalEntryStore.getJournalEntry(entryId);
+      if (entry) {
+        setJournalEntry(entry);
+      } else {
+        return props.history.push('/NotFoundPage');
+      }
     }
     return () => journalEntryStore.removeChangeListener(onChange);
   }, [
     props.match.params.userId,
     props.match.params.entryId,
     journalEntries,
-    journalEntry,
+    props.history,
   ]);
+
+  useEffect(() => {
+    setDate(new Date(journalEntry.date).toDateString());
+    setExercises(journalEntry.exercises);
+    setWeightFormat(journalEntry.weightFormat);
+  }, [journalEntry]);
 
   function onChange() {
     setJournalEntries(journalEntryStore.getJournalEntries());
-    journalEntryStore.getJournalEntries();
   }
 
   return (
