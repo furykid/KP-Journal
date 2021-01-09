@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from "react";
-import Footer from "../components/common/Footer";
-import journalEntryStore from "../stores/journalEntryStore";
-import * as journalEntryActions from "../actions/journalEntryActions";
-import JournalEntryExercisesList from "./JournalEntryExercisesList";
-import JournalEntryBase from "./JournalEntryBase";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useState, useEffect } from 'react';
+import Footer from '../components/common/Footer';
+import journalEntryStore from '../stores/journalEntryStore';
+import * as journalEntryActions from '../actions/journalEntryActions';
+import JournalEntryExercisesList from './JournalEntryExercisesList';
+import JournalEntryBase from './JournalEntryBase';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 function JournalEntryPage(props) {
   const [exercises, setExercises] = useState([]);
-  const [date, setDate] = useState("");
-  const [weightFormat, setWeightFormat] = useState("");
+  const [date, setDate] = useState('');
+  const [weightFormat, setWeightFormat] = useState('');
   const [journalEntries, setJournalEntries] = useState(
     journalEntryStore.getJournalEntries()
   );
   const [journalEntry, setJournalEntry] = useState({
     id: 0,
-    date: "",
+    date: '',
     userId: 0,
-    tag: "",
-    weightFormat: "",
+    tag: '',
+    weightFormat: '',
     sleep: 0,
     calories: 0,
-    notes: "",
+    notes: '',
     exercises: [
       {
         id: 0,
-        exercise: "",
+        exercise: '',
         set: 0,
         weight: 0,
         reps: 0,
         pr: false,
-        notes: "",
+        notes: '',
       },
     ],
   });
@@ -46,16 +46,18 @@ function JournalEntryPage(props) {
     if (entryId) {
       setJournalEntry(journalEntryStore.getJournalEntry(entryId));
     }
-    return () => journalEntryStore.removeChangeListener(onChange);
-  }, [props.match.params.userId, props.match.params.entryId, journalEntries]);
-
-  useEffect(() => {
     if (journalEntry) {
       setDate(new Date(journalEntry.date).toDateString());
       setExercises(journalEntry.exercises);
       setWeightFormat(journalEntry.weightFormat);
     }
-  }, [journalEntry, journalEntries]);
+    return () => journalEntryStore.removeChangeListener(onChange);
+  }, [
+    props.match.params.userId,
+    props.match.params.entryId,
+    journalEntries,
+    journalEntry,
+  ]);
 
   function onChange() {
     setJournalEntries(journalEntryStore.getJournalEntries());
@@ -66,7 +68,7 @@ function JournalEntryPage(props) {
     <>
       <div>
         <div>&nbsp;</div>
-        <h1 className="text-center">Journal entry for {date}</h1>
+        <h1 className='text-center'>Journal entry for {date}</h1>
       </div>
       <Row>
         <Col>
@@ -74,12 +76,13 @@ function JournalEntryPage(props) {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col></Col>
+        <Col xs='10'>
           <JournalEntryExercisesList exercises={exercises || []} />
         </Col>
-        <Col xs="auto"></Col>
-        <Footer exercises={exercises || []} format={weightFormat || ""} />
+        <Col></Col>
       </Row>
+      <Footer exercises={exercises || []} format={weightFormat || ''} />
     </>
   );
 }
