@@ -86,7 +86,9 @@ function JournalEntryExercisesList(props) {
           })}
         <Popup open={open} onClose={closeModal} closeOnDocumentClick>
           <div>
-            <button onClick={closeModal}>&times;</button>
+            <button className='float-right' onClick={closeModal}>
+              &times;
+            </button>
             <ExcerciseForm
               exercise={activeExercise}
               updateExercise={handeExcerciseUpdate}

@@ -9,6 +9,7 @@ function ExerciseForm(props) {
   const [weight, setWeight] = useState(props.exercise.weight);
   const [reps, setReps] = useState(props.exercise.reps);
   const [notes, setNotes] = useState(props.exercise.notes);
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -35,7 +36,10 @@ function ExerciseForm(props) {
             autoFocus
             type='text'
             value={exercise}
-            onChange={(event) => setExercise(event.target.value)}
+            onChange={(event) => {
+              setExercise(event.target.value);
+              setSaveButtonDisabled(false);
+            }}
           />
         </Form.Group>
         <Form.Group controlId='setweightreps'>
@@ -43,26 +47,38 @@ function ExerciseForm(props) {
           <Form.Control
             type='text'
             value={set}
-            onChange={(event) => setSet(event.target.value)}
+            onChange={(event) => {
+              setSet(event.target.value);
+              setSaveButtonDisabled(false);
+            }}
           />
           <Form.Label>Weight</Form.Label>
           <Form.Control
             type='text'
             value={weight}
-            onChange={(event) => setWeight(event.target.value)}
+            onChange={(event) => {
+              setWeight(event.target.value);
+              setSaveButtonDisabled(false);
+            }}
           />
           <Form.Label>Reps</Form.Label>
           <Form.Control
             type='text'
             value={reps}
-            onChange={(event) => setReps(event.target.value)}
+            onChange={(event) => {
+              setReps(event.target.value);
+              setSaveButtonDisabled(false);
+            }}
           />
         </Form.Group>
         <Form.Group controlId='pr'>
           <Form.Check
             label='PR'
             type='checkbox'
-            onChange={(event) => setPr(event.target.checked ? 'true' : 'false')}
+            onChange={(event) => {
+              setPr(event.target.checked ? 'true' : 'false');
+              setSaveButtonDisabled(false);
+            }}
             checked={pr === 'true'}
           />
         </Form.Group>
@@ -71,10 +87,17 @@ function ExerciseForm(props) {
           <Form.Control
             type='text'
             value={notes}
-            onChange={(event) => setNotes(event.target.value)}
+            onChange={(event) => {
+              setNotes(event.target.value);
+              setSaveButtonDisabled(false);
+            }}
           />
         </Form.Group>
-        <Button type='submit' className='my-1'>
+        <Button
+          type='submit'
+          className='my-1 float-right'
+          disabled={saveButtonDisabled}
+        >
           Save
         </Button>
       </Form>
