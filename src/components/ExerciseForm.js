@@ -24,10 +24,6 @@ function ExerciseForm(props) {
     props.updateExercise(newExercise);
   }
 
-  function handlePRCheckboxChanged(event) {
-    setPr(event.target.checked ? 'true' : 'false');
-  }
-
   return (
     <>
       <div>&nbsp;</div>
@@ -66,7 +62,7 @@ function ExerciseForm(props) {
           <Form.Check
             label='PR'
             type='checkbox'
-            onChange={handlePRCheckboxChanged}
+            onChange={(event) => setPr(event.target.checked ? 'true' : 'false')}
             checked={pr === 'true'}
           />
         </Form.Group>
