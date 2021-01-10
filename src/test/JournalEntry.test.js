@@ -1,4 +1,4 @@
-import JournalEntryPage from '../../src/components/JournalEntryPage';
+import JournalEntryExercisesList from '../../src/components/JournalEntryExercisesList';
 import { configure, mount } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({ adapter: new Adapter() });
@@ -43,13 +43,10 @@ const _journalEntry = {
   ],
 };
 
-describe('Journal Entriy render exercises', () => {
+describe('Journal Entry render exercises', () => {
   it('renders exercise list from props', () => {
     const wrapper = mount(
-      <JournalEntryPage
-        journalEntry={_journalEntry}
-        match={{ params: { userId: 0, entryId: 1 } }}
-      />
+      <JournalEntryExercisesList journalEntry={_journalEntry} />
     );
 
     expect(wrapper.props().journalEntry.exercises).toEqual(
@@ -57,38 +54,31 @@ describe('Journal Entriy render exercises', () => {
     );
   });
 
-  // it('renders journal entry specific data to list', () => {
-  //   const wrapper = mount(
-  //     <JournalEntryPage
-  //       journalEntry={_journalEntry}
-  //       match={{ params: { userId: 0, entryId: 1 } }}
-  //     />
-  //   );
+  it('renders journal entry specific data to list', () => {
+    const wrapper = mount(
+      <JournalEntryExercisesList journalEntry={_journalEntry} />
+    );
 
-  //   const list = wrapper.find('ul');
-  //   expect(list).toHaveLength(1);
+    const list = wrapper.find('ul');
+    expect(list).toHaveLength(_journalEntry.exercises.length);
 
-  //   list.forEach((li, rowIndex) => {
-  //     const nameElement = li.find('h5');
-  //     expect(nameElement.childAt(0).text()).toContain(
-  //       _journalEntry.exercises[rowIndex].exercise
-  //     );
-  //     const element = li.find('li');
-  //     expect(element.childAt(0).text()).toContain(
-  //       _journalEntry.exercises[rowIndex].exercise
-  //     );
-  //     expect(element.childAt(1).text()).toContain(
-  //       _journalEntry.exercises[rowIndex].set
-  //     );
-  //     expect(element.childAt(2).text()).toContain(
-  //       _journalEntry.exercises[rowIndex].weight
-  //     );
-  //     expect(element.childAt(3).text()).toContain(
-  //       _journalEntry.exercises[rowIndex].reps
-  //     );
-  //     expect(element.childAt(4).text()).toContain(
-  //       _journalEntry.exercises[rowIndex].notes
-  //     );
-  //   });
-  // });
+    list.forEach((li, rowIndex) => {
+      const element = li.find('li');
+      expect(element.childAt(0).text()).toContain(
+        _journalEntry.exercises[rowIndex].exercise
+      );
+      expect(element.childAt(1).text()).toContain(
+        _journalEntry.exercises[rowIndex].set
+      );
+      expect(element.childAt(2).text()).toContain(
+        _journalEntry.exercises[rowIndex].weight
+      );
+      expect(element.childAt(3).text()).toContain(
+        _journalEntry.exercises[rowIndex].reps
+      );
+      expect(element.childAt(4).text()).toContain(
+        _journalEntry.exercises[rowIndex].notes
+      );
+    });
+  });
 });
