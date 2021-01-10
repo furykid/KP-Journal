@@ -82,11 +82,11 @@ function JournalEntryPage(props) {
       <Row>
         <Col></Col>
         <Col xs='10'>
-          <JournalEntryExercisesList exercises={exercises || []} />
+          <JournalEntryExercisesList journalEntry={journalEntry} />
         </Col>
         <Col></Col>
       </Row>
-      <Footer exercises={exercises || []} format={weightFormat || ''} />
+      <Footer exercises={exercises || []} format={weightFormat} />
     </>
   );
 }

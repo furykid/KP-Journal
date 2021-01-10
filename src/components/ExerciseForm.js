@@ -12,6 +12,20 @@ function ExerciseForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    let newExercise = {
+      ...props.exercise,
+      exercise: exercise,
+      set: set,
+      weight: weight,
+      reps: reps,
+      pr: pr,
+      notes: notes,
+    };
+    props.updateExercise(newExercise);
+  }
+
+  function handlePRCheckboxChanged(event) {
+    setPr(event.target.checked ? 'true' : 'false');
   }
 
   return (
@@ -52,9 +66,8 @@ function ExerciseForm(props) {
           <Form.Check
             label='PR'
             type='checkbox'
-            value={pr}
-            onChange={(event) => setPr(event.target.value)}
-            checked={pr ? true : false}
+            onChange={handlePRCheckboxChanged}
+            checked={pr === 'true'}
           />
         </Form.Group>
         <Form.Group controlId='set'>

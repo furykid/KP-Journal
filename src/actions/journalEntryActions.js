@@ -1,6 +1,6 @@
-import dispatcher from "../appDispatcher";
-import * as journalEntryApi from "../api/journalEntryApi";
-import actionTypes from "./actionTypes";
+import dispatcher from '../appDispatcher';
+import * as journalEntryApi from '../api/journalEntryApi';
+import actionTypes from './actionTypes';
 
 export function saveJournalEntry(journalEntry) {
   return journalEntryApi
@@ -8,10 +8,10 @@ export function saveJournalEntry(journalEntry) {
     .then((savedJournalEntry) => {
       // Tell the dispatcher to update all the stores that a course was just created
       dispatcher.dispatch({
-        actionType: journalEntry.id
+        actionType: savedJournalEntry.id
           ? actionTypes.UPDATE_JOURNAL_ENTRY
           : actionTypes.CREATE_JOURNAL_ENTRY,
-        author: savedJournalEntry,
+        journalEntry: savedJournalEntry,
       });
     });
 }
