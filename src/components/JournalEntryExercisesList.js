@@ -30,19 +30,12 @@ function JournalEntryExercisesList(props) {
     margin: '5%',
   };
 
-  function handeExcerciseUpdate(newExercise) {
+  function handleExcerciseUpdate(newExercise) {
     if (newExercise) {
-      let tempExercises = [
-        ...props.journalEntry.exercises.filter(
-          (exercise) => exercise.id !== newExercise.id
-        ),
-        newExercise,
-      ];
-      let tempEntry = {
-        ...props.journalEntry,
-        exercises: tempExercises,
-      };
-      journalEntryActions.saveJournalEntry(tempEntry);
+      journalEntryActions.updateEntryWithNewExercise(
+        props.journalEntry,
+        newExercise
+      );
       setOpen(false);
     }
   }
@@ -91,7 +84,7 @@ function JournalEntryExercisesList(props) {
             </button>
             <ExcerciseForm
               exercise={activeExercise}
-              updateExercise={handeExcerciseUpdate}
+              updateExercise={handleExcerciseUpdate}
             />
           </div>
         </Popup>

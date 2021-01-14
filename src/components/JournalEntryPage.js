@@ -6,6 +6,7 @@ import JournalEntryExercisesList from './JournalEntryExercisesList';
 import JournalEntryBase from './JournalEntryBase';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 function JournalEntryPage(props) {
   const [exercises, setExercises] = useState([]);
@@ -77,6 +78,13 @@ function JournalEntryPage(props) {
       <Row>
         <Col>
           <JournalEntryBase journalEntry={journalEntry} />
+        </Col>
+      </Row>
+      <Row className='text-center'>
+        <Col>
+          <Button className='btn btn-info' onClick={() => {}}>
+            Add Exercise
+          </Button>
         </Col>
       </Row>
       <Row>

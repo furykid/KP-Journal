@@ -16,6 +16,22 @@ export function saveJournalEntry(journalEntry) {
     });
 }
 
+export function updateEntryWithNewExercise(journalEntry, newExercise) {
+  let tempExercises = [
+    ...journalEntry.exercises.filter(
+      (exercise) => exercise.id !== newExercise.id
+    ),
+    newExercise,
+  ];
+
+  let tempEntry = {
+    ...journalEntry,
+    exercises: tempExercises,
+  };
+
+  saveJournalEntry(tempEntry);
+}
+
 export function deleteJournalEntry(userId, journalEntryId) {
   return journalEntryApi.deleteJournalEntry(userId, journalEntryId).then(() => {
     dispatcher.dispatch({
