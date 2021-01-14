@@ -100,6 +100,13 @@ function ExerciseForm(props) {
         >
           Save
         </Button>
+        <Button
+          type='delete'
+          className='btn btn-danger float-left'
+          disabled={() => exercise !== undefined}
+        >
+          Delete
+        </Button>
       </Form>
     </>
   );
