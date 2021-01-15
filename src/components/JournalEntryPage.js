@@ -7,14 +7,20 @@ import JournalEntryBase from './JournalEntryBase';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import ExcerciseForm from './ExerciseForm';
 
 function JournalEntryPage(props) {
+  const [open, setOpen] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [date, setDate] = useState('');
   const [weightFormat, setWeightFormat] = useState('');
   const [journalEntries, setJournalEntries] = useState(
     journalEntryStore.getJournalEntries()
   );
+  const closeModal = () => setOpen(false);
+
   const [journalEntry, setJournalEntry] = useState({
     id: 0,
     date: '',
@@ -36,6 +42,16 @@ function JournalEntryPage(props) {
       },
     ],
   });
+
+  const defaultExercise = {
+    id: null,
+    exercise: '',
+    set: null,
+    weight: null,
+    reps: null,
+    pr: false,
+    notes: '',
+  };
 
   useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
@@ -69,6 +85,13 @@ function JournalEntryPage(props) {
     setJournalEntries(journalEntryStore.getJournalEntries());
   }
 
+  function handleExcerciseUpdate(newExercise) {
+    if (newExercise) {
+      journalEntryActions.updateEntryWithNewExercise(journalEntry, newExercise);
+      setOpen(false);
+    }
+  }
+
   return (
     <>
       <div>
@@ -82,7 +105,12 @@ function JournalEntryPage(props) {
       </Row>
       <Row className='text-center'>
         <Col>
-          <Button className='btn btn-info' onClick={() => {}}>
+          <Button
+            className='btn btn-info'
+            onClick={() => {
+              setOpen((o) => !o);
+            }}
+          >
             Add Exercise
           </Button>
         </Col>
@@ -94,6 +122,17 @@ function JournalEntryPage(props) {
         </Col>
         <Col></Col>
       </Row>
+      <Popup open={open} onClose={closeModal} closeOnDocumentClick>
+        <div>
+          <button className='float-right' onClick={closeModal}>
+            &times;
+          </button>
+          <ExcerciseForm
+            exercise={defaultExercise}
+            updateExercise={handleExcerciseUpdate}
+          />
+        </div>
+      </Popup>
       <Footer exercises={exercises || []} format={weightFormat} />
     </>
   );

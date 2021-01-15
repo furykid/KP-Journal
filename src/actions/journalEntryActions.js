@@ -17,6 +17,18 @@ export function saveJournalEntry(journalEntry) {
 }
 
 export function updateEntryWithNewExercise(journalEntry, newExercise) {
+  // Grab the next ID manually if one doesn't already exist
+  if (newExercise.id === null) {
+    if (journalEntry.exercises.length > 0) {
+      journalEntry.exercises
+        .sort(({ id: previousId }, { id: currentId }) => previousId - currentId)
+        .reverse();
+      newExercise.id = journalEntry.exercises[0].id + 1;
+    } else {
+      newExercise.id = 1;
+    }
+  }
+
   let tempExercises = [
     ...journalEntry.exercises.filter(
       (exercise) => exercise.id !== newExercise.id

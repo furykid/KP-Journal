@@ -50,6 +50,7 @@ function JournalEntryExercisesList(props) {
           .sort(
             ({ id: previousId }, { id: currentId }) => previousId - currentId
           )
+          .reverse()
           .map((exercise) => {
             const prStyle = { color: 'orange' };
             return (
