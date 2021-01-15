@@ -16,6 +16,19 @@ export function saveJournalEntry(journalEntry) {
     });
 }
 
+export function deleteExercise(journalEntry, exerciseId) {
+  let tempExercises = [
+    ...journalEntry.exercises.filter((exercise) => exercise.id !== exerciseId),
+  ];
+
+  let tempEntry = {
+    ...journalEntry,
+    exercises: tempExercises,
+  };
+
+  saveJournalEntry(tempEntry);
+}
+
 export function updateEntryWithNewExercise(journalEntry, newExercise) {
   // Grab the next ID manually if one doesn't already exist
   if (newExercise.id === null) {

@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 function ExerciseForm(props) {
+  const [errors, setErrors] = useState({});
   const [exercise, setExercise] = useState(props.exercise.exercise);
   const [set, setSet] = useState(props.exercise.set);
   const [pr, setPr] = useState(props.exercise.pr);
@@ -12,6 +13,7 @@ function ExerciseForm(props) {
   const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
 
   function handleSubmit(event) {
+    if (!formIsValid()) return;
     event.preventDefault();
     let newExercise = {
       ...props.exercise,
@@ -23,6 +25,22 @@ function ExerciseForm(props) {
       notes: notes,
     };
     props.updateExercise(newExercise);
+  }
+
+  function handleDelete(event) {
+    event.preventDefault();
+    props.onDelete(props.exercise.id);
+  }
+
+  function formIsValid() {
+    const _errors = {};
+
+    if (!weight) _errors.weight = 'Weight is required';
+    if (!reps) _errors.reps = 'Reps is required';
+
+    setErrors(_errors);
+    // Form is valid is the errors object has no properties
+    return Object.keys(_errors).length === 0;
   }
 
   return (
@@ -61,6 +79,9 @@ function ExerciseForm(props) {
               setSaveButtonDisabled(false);
             }}
           />
+          {errors.weight && (
+            <div className='alert alert-danger'>{errors.weight}</div>
+          )}
           <Form.Label>Reps</Form.Label>
           <Form.Control
             type='text'
@@ -70,6 +91,9 @@ function ExerciseForm(props) {
               setSaveButtonDisabled(false);
             }}
           />
+          {errors.reps && (
+            <div className='alert alert-danger'>{errors.reps}</div>
+          )}
         </Form.Group>
         <Form.Group controlId='pr'>
           <Form.Check
@@ -101,9 +125,9 @@ function ExerciseForm(props) {
           Save
         </Button>
         <Button
-          type='delete'
-          className='btn btn-danger float-left'
-          disabled={exercise !== undefined}
+          type='submit'
+          className='my-1 btn btn-danger float-left'
+          onClick={handleDelete}
         >
           Delete
         </Button>

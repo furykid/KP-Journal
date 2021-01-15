@@ -44,11 +44,11 @@ function JournalEntryPage(props) {
   });
 
   const defaultExercise = {
-    id: null,
+    id: '',
     exercise: '',
-    set: null,
-    weight: null,
-    reps: null,
+    set: '',
+    weight: '',
+    reps: '',
     pr: false,
     notes: '',
   };

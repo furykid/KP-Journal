@@ -40,6 +40,11 @@ function JournalEntryExercisesList(props) {
     }
   }
 
+  function handleExerciseDelete(exerciseId) {
+    journalEntryActions.deleteExercise(props.journalEntry, exerciseId);
+    setOpen(false);
+  }
+
   return (
     <>
       <div
@@ -86,6 +91,7 @@ function JournalEntryExercisesList(props) {
             <ExcerciseForm
               exercise={activeExercise}
               updateExercise={handleExcerciseUpdate}
+              onDelete={handleExerciseDelete}
             />
           </div>
         </Popup>
