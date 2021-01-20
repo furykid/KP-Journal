@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import journalEntryStore from "../stores/journalEntryStore";
-import { loadJournalEntries } from "../actions/journalEntryActions";
-import JournalEntriesList from "./JournalEntriesList";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useState, useEffect } from 'react';
+import journalEntryStore from '../stores/journalEntryStore';
+import { loadJournalEntries } from '../actions/journalEntryActions';
+import JournalEntriesList from './JournalEntriesList';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 function JournalEntriesPage(props) {
   const [_userId, setUserId] = useState(0);
@@ -30,7 +31,10 @@ function JournalEntriesPage(props) {
         <Col></Col>
         <Col xs={6}>
           <div>&nbsp;</div>
-          <h1 className="text-center">Journal Entries</h1>
+          <div className='text-center'>
+            <h1>Journal Entries</h1>
+            <Button className='btn btn-success'>Add Entry</Button>
+          </div>
           <JournalEntriesList journalEntries={journalEntries || []} />
         </Col>
         <Col></Col>
