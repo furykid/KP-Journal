@@ -1,11 +1,11 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
+import React from 'react';
+import Button from 'react-bootstrap/Button';
 import {
   ListGroup,
   ListGroupItem,
   ListGroupItemHeading,
   ListGroupItemText,
-} from "reactstrap";
+} from 'reactstrap';
 
 function JournalEntriesList(props) {
   return (
@@ -16,15 +16,15 @@ function JournalEntriesList(props) {
             <ListGroup key={entry.id}>
               <div>&nbsp;</div>
               <ListGroupItem
-                tag="a"
-                href={"/user/" + entry.userId + "/journalEntries/" + entry.id}
+                tag='a'
+                href={'/user/' + entry.userId + '/journalEntries/' + entry.id}
                 action
               >
                 <ListGroupItemHeading>
                   {new Date(entry.date).toDateString()}
                 </ListGroupItemHeading>
                 <ListGroupItemText>
-                  <Button variant="outline-info" size="sm" disabled>
+                  <Button variant='outline-info' size='sm' disabled>
                     {entry.tag}
                   </Button>
                 </ListGroupItemText>
