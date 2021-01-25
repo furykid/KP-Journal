@@ -4,11 +4,29 @@ import Button from 'react-bootstrap/Button';
 
 function JournalEntryForm(props) {
   const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [tag, setTag] = useState('');
+  const [weightFormat, setWeightFormat] = useState('');
+  const [userId, setUserId] = useState(props.userId);
   const [calories, setCalories] = useState('');
   const [sleep, setSleep] = useState('');
   const [notes, setNotes] = useState('');
 
-  function handleSubmit() {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    setWeightFormat('kg'); // Get this from a global setting
+    setUserId(props.userId);
+    const newEntry = {
+      date: date,
+      tag: tag,
+      weightFormat: weightFormat,
+      userId: userId,
+      calories: calories,
+      sleep: sleep,
+      notes: notes,
+      exercises: [],
+    };
+    props.onNewJournalEntry(newEntry);
+  }
 
   return (
     <div>
@@ -26,18 +44,28 @@ function JournalEntryForm(props) {
               setDate(event.target.value);
             }}
           ></Form.Control>
-          <Form.Label>Calories</Form.Label>
+
+          <Form.Label>tag</Form.Label>
           <Form.Control
             type='string'
+            value={tag}
+            onChange={(event) => setTag(event.target.value)}
+          ></Form.Control>
+
+          <Form.Label>Calories</Form.Label>
+          <Form.Control
+            type='number'
             value={calories}
             onChange={(event) => setCalories(event.target.value)}
           ></Form.Control>
+
           <Form.Label>Sleep</Form.Label>
           <Form.Control
-            type='string'
+            type='number'
             value={sleep}
             onChange={(event) => setSleep(event.target.value)}
           ></Form.Control>
+
           <Form.Label>Notes</Form.Label>
           <Form.Control
             as='textarea'

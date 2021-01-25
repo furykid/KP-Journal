@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Popup from 'reactjs-popup';
+import * as journalEntryActions from '../actions/journalEntryActions';
 
 function JournalEntriesPage(props) {
   const [_userId, setUserId] = useState(0);
@@ -19,15 +20,35 @@ function JournalEntriesPage(props) {
 
   useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
-    if (_userId !== props.match.params.userId) {
-      setUserId(props.match.params.userId);
-      loadJournalEntries(props.match.params.userId);
+
+    // This seems temporary in case we want to switch users for some reason...
+    let userId = props.match.params.userId;
+    if (_userId !== userId) {
+      setUserId(userId);
     }
+
+    if (journalEntryStore.getJournalEntries().length === 0 && userId !== '') {
+      journalEntryActions.loadJournalEntries(userId);
+    }
+
     return () => journalEntryStore.removeChangeListener(onChange);
-  }, [props.match.params.userId, journalEntries.length, _userId]);
+  }, [
+    props.match.params.userId,
+    journalEntries.length,
+    _userId,
+    journalEntries,
+  ]);
 
   function onChange() {
+    debugger;
     setJournalEntries(journalEntryStore.getJournalEntries());
+  }
+
+  function handleNewJournalEntry(entry) {
+    if (entry) {
+      journalEntryActions.saveJournalEntry(entry);
+      setOpen(false);
+    }
   }
 
   return (
@@ -53,7 +74,10 @@ function JournalEntriesPage(props) {
               <button className='float-right' onClick={closeModal}>
                 &times;
               </button>
-              <JournalEntryForm />
+              <JournalEntryForm
+                onNewJournalEntry={handleNewJournalEntry}
+                userId={_userId}
+              />
             </div>
           </Popup>
         </Col>

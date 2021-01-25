@@ -8,7 +8,7 @@ export function getJournalEntries(userId) {
 }
 
 export function saveJournalEntry(journalEntry) {
-  return fetch(baseUrl + journalEntry.id, {
+  return fetch(baseUrl + (journalEntry.id || ''), {
     method: journalEntry.id ? 'PUT' : 'POST', // POST for create, PUT to update when id already exists.
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(journalEntry),
