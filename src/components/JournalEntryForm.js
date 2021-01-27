@@ -3,23 +3,21 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 function JournalEntryForm(props) {
+  let _userId = ~~props.userId;
+  let _weightFormat = 'kg';
   const [date, setDate] = useState(new Date().toLocaleDateString());
   const [tag, setTag] = useState('');
-  const [weightFormat, setWeightFormat] = useState('');
-  const [userId, setUserId] = useState(props.userId);
   const [calories, setCalories] = useState('');
   const [sleep, setSleep] = useState('');
   const [notes, setNotes] = useState('');
 
   function handleSubmit(event) {
     event.preventDefault();
-    setWeightFormat('kg'); // Get this from a global setting
-    setUserId(props.userId);
     const newEntry = {
       date: date,
       tag: tag,
-      weightFormat: weightFormat,
-      userId: userId,
+      weightFormat: _weightFormat,
+      userId: _userId,
       calories: calories,
       sleep: sleep,
       notes: notes,

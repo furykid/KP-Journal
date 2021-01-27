@@ -2,7 +2,7 @@
   "journalEntries": [
     {
       "id": 1,
-      "date": "2020-05-23T18:25:43.511Z",
+      "date": "2020-05-23",
       "userId": 0,
       "tag": "snatch",
       "weightFormat": "kg",
@@ -167,7 +167,7 @@
     },
     {
       "id": 2,
-      "date": "2020-05-24T18:25:43.511Z",
+      "date": "2020-05-24",
       "userId": 0,
       "tag": "clean",
       "weightFormat": "kg",
@@ -232,7 +232,7 @@
         {
           "id": 7,
           "exercise": "clean from blocks",
-          "set": 6,
+          "set": 7,
           "weight": 85,
           "reps": 2,
           "pr": true,
@@ -251,7 +251,7 @@
       "id": 0,
       "weight": 169,
       "height": "5' 5\"",
-      "userSince": "2010-05-23T18:25:43.511Z"
+      "userSince": "2010-05-23"
     },
     {
       "userName": "Test User",
@@ -261,7 +261,7 @@
       "id": 1,
       "weight": 159,
       "height": "5' 5\"",
-      "userSince": "2019-05-23T18:25:43.511Z"
+      "userSince": "2019-05-23"
     }
   ]
 }

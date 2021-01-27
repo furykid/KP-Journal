@@ -63,19 +63,19 @@ function ExerciseForm(props) {
         <Form.Group controlId='setweightreps'>
           <Form.Label>Set</Form.Label>
           <Form.Control
-            type='text'
+            type='number'
             value={set}
             onChange={(event) => {
-              setSet(event.target.value);
+              setSet(~~event.target.value);
               setSaveButtonDisabled(false);
             }}
           />
           <Form.Label>Weight</Form.Label>
           <Form.Control
-            type='text'
+            type='number'
             value={weight}
             onChange={(event) => {
-              setWeight(event.target.value);
+              setWeight(~~event.target.value);
               setSaveButtonDisabled(false);
             }}
           />
@@ -84,10 +84,10 @@ function ExerciseForm(props) {
           )}
           <Form.Label>Reps</Form.Label>
           <Form.Control
-            type='text'
+            type='number'
             value={reps}
             onChange={(event) => {
-              setReps(event.target.value);
+              setReps(~~event.target.value);
               setSaveButtonDisabled(false);
             }}
           />
@@ -100,16 +100,16 @@ function ExerciseForm(props) {
             label='PR'
             type='checkbox'
             onChange={(event) => {
-              setPr(event.target.checked ? 'true' : 'false');
+              setPr(event.target.checked ? true : false);
               setSaveButtonDisabled(false);
             }}
-            checked={pr === 'true'}
+            checked={pr === true}
           />
         </Form.Group>
-        <Form.Group controlId='set'>
+        <Form.Group controlId='notes'>
           <Form.Label>Notes</Form.Label>
           <Form.Control
-            type='text'
+            type='textarea'
             value={notes}
             onChange={(event) => {
               setNotes(event.target.value);

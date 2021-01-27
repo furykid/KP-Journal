@@ -69,7 +69,7 @@ function JournalEntryExercisesList(props) {
                   }}
                 >
                   <ListGroupItemHeading
-                    style={exercise.pr === 'true' ? prStyle : {}}
+                    style={exercise.pr === true ? prStyle : {}}
                   >
                     {exercise.exercise}
                   </ListGroupItemHeading>
