@@ -34,7 +34,6 @@ function JournalEntriesPage(props) {
   function handleNewJournalEntry(entry) {
     if (entry) {
       journalEntryActions.saveJournalEntry(entry).then(() => {
-        props.history.push('/user/' + _userId + '/journalEntries/');
         toast.success('Course saved.');
         setOpen(false);
       });

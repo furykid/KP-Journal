@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 function JournalEntryForm(props) {
   let _userId = ~~props.userId;
   let _weightFormat = 'kg';
-  const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [date, setDate] = useState('');
   const [tag, setTag] = useState('');
   const [calories, setCalories] = useState('');
   const [sleep, setSleep] = useState('');
