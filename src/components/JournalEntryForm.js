@@ -56,14 +56,14 @@ function JournalEntryForm(props) {
           <Form.Control
             type='number'
             value={calories}
-            onChange={(event) => setCalories(event.target.value)}
+            onChange={(event) => setCalories(~~event.target.value)}
           ></Form.Control>
 
           <Form.Label>Sleep</Form.Label>
           <Form.Control
             type='number'
             value={sleep}
-            onChange={(event) => setSleep(event.target.value)}
+            onChange={(event) => setSleep(~~event.target.value)}
           ></Form.Control>
 
           <Form.Label>Notes</Form.Label>

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import journalEntryStore from '../stores/journalEntryStore';
-import { loadJournalEntries } from '../actions/journalEntryActions';
 import JournalEntriesList from './JournalEntriesList';
 import JournalEntryForm from './JournalEntryForm';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Popup from 'reactjs-popup';
+import { toast } from 'react-toastify';
+
 import * as journalEntryActions from '../actions/journalEntryActions';
 
 function JournalEntriesPage(props) {
-  const [_userId, setUserId] = useState(0);
+  const _userId = props.match.params.userId;
   const [journalEntries, setJournalEntries] = useState(
     journalEntryStore.getJournalEntries()
   );
@@ -20,34 +21,23 @@ function JournalEntriesPage(props) {
 
   useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
-
-    // This seems temporary in case we want to switch users for some reason...
-    let userId = props.match.params.userId;
-    if (_userId !== userId) {
-      setUserId(userId);
+    if (journalEntryStore.getJournalEntries().length === 0 && _userId !== '') {
+      journalEntryActions.loadJournalEntries(_userId);
     }
-
-    if (journalEntryStore.getJournalEntries().length === 0 && userId !== '') {
-      journalEntryActions.loadJournalEntries(userId);
-    }
-
     return () => journalEntryStore.removeChangeListener(onChange);
-  }, [
-    props.match.params.userId,
-    journalEntries.length,
-    _userId,
-    journalEntries,
-  ]);
+  }, [_userId]);
 
   function onChange() {
-    debugger;
     setJournalEntries(journalEntryStore.getJournalEntries());
   }
 
   function handleNewJournalEntry(entry) {
     if (entry) {
-      journalEntryActions.saveJournalEntry(entry);
-      setOpen(false);
+      journalEntryActions.saveJournalEntry(entry).then(() => {
+        props.history.push('/user/' + _userId + '/journalEntries/');
+        toast.success('Course saved.');
+        setOpen(false);
+      });
     }
   }
 
@@ -66,9 +56,7 @@ function JournalEntriesPage(props) {
               Add Entry
             </Button>
           </div>
-
           <JournalEntriesList journalEntries={journalEntries} />
-
           <Popup open={open} onClose={closeModal} closeOnDocumentClick>
             <div>
               <button className='float-right' onClick={closeModal}>

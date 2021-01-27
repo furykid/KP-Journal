@@ -11,7 +11,10 @@ export function saveJournalEntry(journalEntry) {
   return fetch(baseUrl + (journalEntry.id || ''), {
     method: journalEntry.id ? 'PUT' : 'POST', // POST for create, PUT to update when id already exists.
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(journalEntry),
+    body: JSON.stringify({
+      ...journalEntry,
+      userId: parseInt(journalEntry.userId, 10),
+    }),
   })
     .then(handleResponse)
     .catch(handleError);

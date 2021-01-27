@@ -8,9 +8,7 @@ export function saveJournalEntry(journalEntry) {
     .then((savedJournalEntry) => {
       // Tell the dispatcher to update all the stores that a course was just created
       dispatcher.dispatch({
-        actionType: savedJournalEntry.id
-          ? actionTypes.UPDATE_JOURNAL_ENTRY
-          : actionTypes.CREATE_JOURNAL_ENTRY,
+        actionType: actionTypes.CREATE_JOURNAL_ENTRY,
         journalEntry: savedJournalEntry,
       });
     });
