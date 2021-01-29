@@ -11,10 +11,21 @@ import { toast } from 'react-toastify';
 import * as journalEntryActions from '../actions/journalEntryActions';
 
 function JournalEntriesPage(props) {
+  const _defaultEntry = {
+    date: '',
+    userId: '',
+    tag: '',
+    weightFormat: '',
+    sleep: '',
+    calories: '',
+    notes: '',
+    exercises: [],
+  };
   const _userId = props.match.params.userId;
   const [_journalEntries, setJournalEntries] = useState(
     journalEntryStore.getJournalEntries()
   );
+  const [selectedEntry, setSelectedEntry] = useState(_defaultEntry);
 
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
@@ -47,6 +58,11 @@ function JournalEntriesPage(props) {
     });
   }
 
+  function handleEditEntry(entry) {
+    setSelectedEntry(entry);
+    setOpen(true);
+  }
+
   return (
     <>
       <Row>
@@ -64,16 +80,25 @@ function JournalEntriesPage(props) {
           </div>
 
           <JournalEntriesList
-            onDeleteEntry={handleDeleteEntry}
             journalEntries={_journalEntries}
+            onDeleteEntry={handleDeleteEntry}
+            onEdit={handleEditEntry}
           />
 
-          <Popup open={open} onClose={closeModal} closeOnDocumentClick>
+          <Popup
+            open={open}
+            onClose={() => {
+              closeModal();
+              setSelectedEntry(_defaultEntry);
+            }}
+            closeOnDocumentClick
+          >
             <div>
               <button className='float-right' onClick={closeModal}>
                 &times;
               </button>
               <JournalEntryForm
+                journalEntry={selectedEntry}
                 onNewJournalEntry={handleNewJournalEntry}
                 userId={_userId}
               />
