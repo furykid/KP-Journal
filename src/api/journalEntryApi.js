@@ -21,7 +21,7 @@ export function saveJournalEntry(journalEntry) {
 }
 
 export function deleteJournalEntry(userId, journalEntryId) {
-  return fetch(baseUrl + userId + '/' + journalEntryId, {
+  return fetch(baseUrl + journalEntryId, {
     method: 'DELETE',
   })
     .then(handleResponse)

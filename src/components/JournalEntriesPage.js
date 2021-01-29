@@ -12,7 +12,7 @@ import * as journalEntryActions from '../actions/journalEntryActions';
 
 function JournalEntriesPage(props) {
   const _userId = props.match.params.userId;
-  const [journalEntries, setJournalEntries] = useState(
+  const [_journalEntries, setJournalEntries] = useState(
     journalEntryStore.getJournalEntries()
   );
 
@@ -34,10 +34,17 @@ function JournalEntriesPage(props) {
   function handleNewJournalEntry(entry) {
     if (entry) {
       journalEntryActions.saveJournalEntry(entry).then(() => {
-        toast.success('Course saved.');
+        toast.success('Entry saved');
         setOpen(false);
       });
     }
+  }
+
+  function handleDeleteEntry(entryId) {
+    journalEntryActions.deleteJournalEntry(_userId, entryId).then(() => {
+      toast.warn('Entry deleted');
+      props.history.push('/user/' + _userId);
+    });
   }
 
   return (
@@ -55,7 +62,12 @@ function JournalEntriesPage(props) {
               Add Entry
             </Button>
           </div>
-          <JournalEntriesList journalEntries={journalEntries} />
+
+          <JournalEntriesList
+            onDeleteEntry={handleDeleteEntry}
+            journalEntries={_journalEntries}
+          />
+
           <Popup open={open} onClose={closeModal} closeOnDocumentClick>
             <div>
               <button className='float-right' onClick={closeModal}>

@@ -40,6 +40,13 @@ function JournalEntriesList(props) {
                   </ListGroupItemText>
                   <ListGroupItemText>notes: {entry.notes}</ListGroupItemText>
                 </ListGroupItem>
+                <Button
+                  className='btn btn-danger float-right'
+                  onClick={() => props.onDeleteEntry(entry.id)}
+                >
+                  Delete
+                </Button>
+                <Button className='btn btn-info float-left'>Edit</Button>
               </ListGroup>
             );
           })}
