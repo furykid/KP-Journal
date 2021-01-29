@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import DatePicker from 'react-date-picker';
 
 function JournalEntryForm(props) {
   let _userId = ~~props.userId;
   let _weightFormat = 'kg';
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date());
   const [tag, setTag] = useState('');
   const [calories, setCalories] = useState('');
   const [sleep, setSleep] = useState('');
@@ -32,16 +33,20 @@ function JournalEntryForm(props) {
       <h1 className='text-center'>New Entry</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='date'>
-          <Form.Label>Date</Form.Label>
-          <Form.Control
-            autoFocus
-            as='input'
-            type='date'
-            value={date}
-            onChange={(event) => {
-              setDate(event.target.value);
-            }}
-          ></Form.Control>
+          <div>
+            <Form.Label>Date </Form.Label>
+            <DatePicker
+              autofocus
+              calendarAriaLabel='Toggle calendar'
+              clearAriaLabel='Clear value'
+              dayAriaLabel='Day'
+              monthAriaLabel='Month'
+              nativeInputAriaLabel='Date'
+              yearAriaLabel='Year'
+              onChange={setDate}
+              value={date}
+            ></DatePicker>
+          </div>
 
           <Form.Label>tag</Form.Label>
           <Form.Control
