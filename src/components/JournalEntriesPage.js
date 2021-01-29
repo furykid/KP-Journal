@@ -54,7 +54,6 @@ function JournalEntriesPage(props) {
   function handleDeleteEntry(entryId) {
     journalEntryActions.deleteJournalEntry(_userId, entryId).then(() => {
       toast.warn('Entry deleted');
-      props.history.push('/user/' + _userId);
     });
   }
 

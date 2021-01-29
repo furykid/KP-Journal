@@ -37,7 +37,6 @@ Dispatcher.register((action) => {
           entry.id === action.journalEntry.id ? action.journalEntry : entry
         );
       } else {
-        debugger;
         _journalEntries.push(action.journalEntry);
       }
       store.emitChange();
