@@ -13,7 +13,7 @@ function JournalEntriesList(props) {
       <div>
         {props.journalEntries
           .slice()
-          .sort((a, b) => a.date - b.date)
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
           .reverse()
           .map((entry) => {
             return (
