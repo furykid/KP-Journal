@@ -109,7 +109,7 @@ function ExerciseForm(props) {
         <Form.Group controlId='notes'>
           <Form.Label>Notes</Form.Label>
           <Form.Control
-            type='textarea'
+            as='textarea'
             value={notes}
             onChange={(event) => {
               setNotes(event.target.value);
