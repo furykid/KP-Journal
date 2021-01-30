@@ -47,7 +47,7 @@ Dispatcher.register((action) => {
       break;
     case actionTypes.DELETE_JOURNAL_ENTRY:
       _journalEntries = _journalEntries.filter(
-        (entry) => entry.id !== ~~action.id
+        (entry) => entry.id !== ~~action.journalEntryId
       );
       store.emitChange();
       break;

@@ -6,7 +6,8 @@ import DatePicker from 'react-date-picker';
 function JournalEntryForm(props) {
   let _userId = ~~props.userId;
   let _weightFormat = 'kg';
-  let _entryId = props.journalEntry.id;
+  let _entryId = props.journalEntry.id || '';
+  let _exercises = props.journalEntry.exercises || [];
   const [date, setDate] = useState(
     props.journalEntry.date !== ''
       ? new Date(props.journalEntry.date)
@@ -20,7 +21,7 @@ function JournalEntryForm(props) {
   function handleSubmit(event) {
     event.preventDefault();
     const newEntry = {
-      id: _entryId === '' ? '' : _entryId,
+      id: _entryId,
       date: date,
       tag: tag,
       weightFormat: _weightFormat,
@@ -28,7 +29,7 @@ function JournalEntryForm(props) {
       calories: calories,
       sleep: sleep,
       notes: notes,
-      exercises: [],
+      exercises: _exercises,
     };
     props.onNewJournalEntry(newEntry);
   }

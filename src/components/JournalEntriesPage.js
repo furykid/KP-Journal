@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import * as journalEntryActions from '../actions/journalEntryActions';
 
 function JournalEntriesPage(props) {
+  const _userId = props.match.params.userId;
   const _defaultEntry = {
     date: '',
     userId: '',
@@ -21,11 +22,11 @@ function JournalEntriesPage(props) {
     notes: '',
     exercises: [],
   };
-  const _userId = props.match.params.userId;
+
+  const [selectedEntry, setSelectedEntry] = useState(_defaultEntry);
   const [_journalEntries, setJournalEntries] = useState(
     journalEntryStore.getJournalEntries()
   );
-  const [selectedEntry, setSelectedEntry] = useState(_defaultEntry);
 
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
