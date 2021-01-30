@@ -12,10 +12,13 @@
     "json-server": "^0.16.3",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
+    "react-date-picker": "^8.0.6",
     "react-dom": "^17.0.1",
     "react-popper": "^2.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-toastify": "^7.0.1",
+    "reactjs-popup": "^2.0.4",
     "reactstrap": "^8.8.1",
     "web-vitals": "^0.2.4"
   },

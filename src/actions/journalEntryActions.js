@@ -1,6 +1,6 @@
-import dispatcher from "../appDispatcher";
-import * as journalEntryApi from "../api/journalEntryApi";
-import actionTypes from "./actionTypes";
+import dispatcher from '../appDispatcher';
+import * as journalEntryApi from '../api/journalEntryApi';
+import actionTypes from './actionTypes';
 
 export function saveJournalEntry(journalEntry) {
   return journalEntryApi
@@ -8,12 +8,51 @@ export function saveJournalEntry(journalEntry) {
     .then((savedJournalEntry) => {
       // Tell the dispatcher to update all the stores that a course was just created
       dispatcher.dispatch({
-        actionType: journalEntry.id
-          ? actionTypes.UPDATE_JOURNAL_ENTRY
-          : actionTypes.CREATE_JOURNAL_ENTRY,
-        author: savedJournalEntry,
+        actionType: actionTypes.CREATE_JOURNAL_ENTRY,
+        journalEntry: savedJournalEntry,
       });
     });
+}
+
+export function deleteExercise(journalEntry, exerciseId) {
+  let tempExercises = [
+    ...journalEntry.exercises.filter((exercise) => exercise.id !== exerciseId),
+  ];
+
+  let tempEntry = {
+    ...journalEntry,
+    exercises: tempExercises,
+  };
+
+  saveJournalEntry(tempEntry);
+}
+
+export function updateEntryWithNewExercise(journalEntry, newExercise) {
+  // Grab the next ID manually if one doesn't already exist
+  if (newExercise.id === '') {
+    if (journalEntry.exercises.length > 0) {
+      journalEntry.exercises
+        .sort(({ id: previousId }, { id: currentId }) => previousId - currentId)
+        .reverse();
+      newExercise.id = ~~journalEntry.exercises[0].id + 1;
+    } else {
+      newExercise.id = 1;
+    }
+  }
+
+  let tempExercises = [
+    ...journalEntry.exercises.filter(
+      (exercise) => exercise.id !== newExercise.id
+    ),
+    newExercise,
+  ];
+
+  let tempEntry = {
+    ...journalEntry,
+    exercises: tempExercises,
+  };
+
+  saveJournalEntry(tempEntry);
 }
 
 export function deleteJournalEntry(userId, journalEntryId) {
