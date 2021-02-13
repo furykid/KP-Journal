@@ -9,7 +9,7 @@ import JournalEntryPage from './JournalEntryPage';
 import NotFoundPage from './NotFoundPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//import ProtectedRoute from "../Auth/ProtectedRoute";
+import ProtectedRoute from '../Auth/ProtectedRoute';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
             path='/user/:userId/journalEntries/:entryId'
             component={JournalEntryPage}
           />
-          <Route path='/user/:userId' component={JournalEntriesPage} />
+          <ProtectedRoute path='/user/:userId' component={JournalEntriesPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

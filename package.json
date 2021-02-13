@@ -26,6 +26,7 @@
     "prestart:api": "node src/utility/FakeData/loadFakeData.js",
     "start:dev": "cross-env REACT_APP_API_URL=http://localhost:3004 react-scripts start",
     "start:api": "json-server --watch ./src/utility/FakeData/db.json --port 3004",
+    "start:prod": "cross-env REACT_APP_API_URL=http://localhost:3004 react-scripts start",
     "start": "run-p start:dev start:api",
     "build": "react-scripts build",
     "test": "react-scripts test",

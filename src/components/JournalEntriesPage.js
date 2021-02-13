@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import journalEntryStore from '../stores/journalEntryStore';
 import JournalEntriesList from './JournalEntriesList';
 import JournalEntryForm from './JournalEntryForm';
+import * as journalEntryActions from '../actions/journalEntryActions';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Popup from 'reactjs-popup';
 import { toast } from 'react-toastify';
-
-import * as journalEntryActions from '../actions/journalEntryActions';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function JournalEntriesPage(props) {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
   const _userId = props.match.params.userId;
   const _defaultEntry = {
     date: '',
@@ -63,51 +65,57 @@ function JournalEntriesPage(props) {
     setOpen(true);
   }
 
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+
   return (
-    <>
-      <Row>
-        <Col></Col>
-        <Col xs={6}>
-          <div>&nbsp;</div>
-          <div className='text-center'>
-            <h1>Journal Entries</h1>
-            <Button
-              className='btn btn-success'
-              onClick={() => setOpen((o) => !o)}
-            >
-              Add Entry
-            </Button>
-          </div>
-
-          <JournalEntriesList
-            journalEntries={_journalEntries}
-            onDeleteEntry={handleDeleteEntry}
-            onEdit={handleEditEntry}
-          />
-
-          <Popup
-            open={open}
-            onClose={() => {
-              closeModal();
-              setSelectedEntry(_defaultEntry);
-            }}
-            closeOnDocumentClick
-          >
-            <div>
-              <button className='float-right' onClick={closeModal}>
-                &times;
-              </button>
-              <JournalEntryForm
-                journalEntry={selectedEntry}
-                onNewJournalEntry={handleNewJournalEntry}
-                userId={_userId}
-              />
+    isAuthenticated && (
+      <>
+        <Row>
+          <Col>{JSON.stringify(user.sub)}</Col>
+          <Col xs={6}>
+            <div>&nbsp;</div>
+            <div className='text-center'>
+              <h1>Journal Entries</h1>
+              <Button
+                className='btn btn-success'
+                onClick={() => setOpen((o) => !o)}
+              >
+                Add Entry
+              </Button>
             </div>
-          </Popup>
-        </Col>
-        <Col></Col>
-      </Row>
-    </>
+
+            <JournalEntriesList
+              journalEntries={_journalEntries}
+              onDeleteEntry={handleDeleteEntry}
+              onEdit={handleEditEntry}
+            />
+
+            <Popup
+              open={open}
+              onClose={() => {
+                closeModal();
+                setSelectedEntry(_defaultEntry);
+              }}
+              closeOnDocumentClick
+            >
+              <div>
+                <button className='float-right' onClick={closeModal}>
+                  &times;
+                </button>
+                <JournalEntryForm
+                  journalEntry={selectedEntry}
+                  onNewJournalEntry={handleNewJournalEntry}
+                  userId={_userId}
+                />
+              </div>
+            </Popup>
+          </Col>
+          <Col></Col>
+        </Row>
+      </>
+    )
   );
 }
 
