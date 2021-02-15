@@ -13,7 +13,7 @@ export function saveJournalEntry(journalEntry) {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       ...journalEntry,
-      userId: parseInt(journalEntry.userId, 10),
+      userId: journalEntry.userId,
     }),
   })
     .then(handleResponse)

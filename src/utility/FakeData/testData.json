@@ -3,7 +3,7 @@
     {
       "id": 1,
       "date": "2020-05-23",
-      "userId": 0,
+      "userId": "115176185419956940000",
       "tag": "snatch",
       "weightFormat": "kg",
       "sleep": 8,
@@ -168,7 +168,7 @@
     {
       "id": 2,
       "date": "2020-05-24",
-      "userId": 0,
+      "userId": "115176185419956940000",
       "tag": "clean",
       "weightFormat": "kg",
       "sleep": 7,
@@ -248,7 +248,7 @@
       "email": "furykid777@gmail.com",
       "password": "password",
       "accountType": "admin",
-      "id": 0,
+      "id": "115176185419956940000",
       "weight": 169,
       "height": "5' 5\"",
       "userSince": "2010-05-23"
