@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import Button from 'react-bootstrap/Button';
+import loadingImg from './loading.gif';
 
 function HomePage(props) {
   const {
@@ -34,17 +35,20 @@ function HomePage(props) {
       }
     };
     getUserMetadata();
-    setUserId(getUserId());
   }, []);
 
-  function getUserId() {
-    if (user) {
-      return user.sub.slice(user.sub.indexOf('|') + 1);
-    }
-  }
+  useEffect(() => {
+    const getUserId = () => {
+      if (user) {
+        return user.sub.slice(user.sub.indexOf('|') + 1);
+      }
+    };
+
+    setUserId(getUserId());
+  }, [user]);
 
   if (isLoading) {
-    return <img src='./loading.gif' alt='loading...' />;
+    return <img src={loadingImg} alt='loading...' />;
   }
 
   if (isAuthenticated) {

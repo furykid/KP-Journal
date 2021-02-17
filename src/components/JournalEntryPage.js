@@ -10,8 +10,11 @@ import Button from 'react-bootstrap/Button';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import ExcerciseForm from './ExerciseForm';
+import { useAuth0 } from '@auth0/auth0-react';
+import loadingImg from './loading.gif';
 
 function JournalEntryPage(props) {
+  const { isAuthenticated, isLoading } = useAuth0();
   const [open, setOpen] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [date, setDate] = useState('');
@@ -92,49 +95,55 @@ function JournalEntryPage(props) {
     }
   }
 
+  if (isLoading) {
+    return <img src={loadingImg} alt='loading...' />;
+  }
+
   return (
-    <>
-      <div>
-        <div>&nbsp;</div>
-        <h1 className='text-center'>Journal entry for {date}</h1>
-      </div>
-      <Row>
-        <Col>
-          <JournalEntryBase journalEntry={journalEntry} />
-        </Col>
-      </Row>
-      <Row className='text-center'>
-        <Col>
-          <Button
-            className='btn btn-info'
-            onClick={() => {
-              setOpen((o) => !o);
-            }}
-          >
-            Add Exercise
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col></Col>
-        <Col xs='10'>
-          <JournalEntryExercisesList journalEntry={journalEntry} />
-        </Col>
-        <Col></Col>
-      </Row>
-      <Popup open={open} onClose={closeModal} closeOnDocumentClick>
+    isAuthenticated && (
+      <>
         <div>
-          <button className='float-right' onClick={closeModal}>
-            &times;
-          </button>
-          <ExcerciseForm
-            exercise={defaultExercise}
-            updateExercise={handleExcerciseUpdate}
-          />
+          <div>&nbsp;</div>
+          <h1 className='text-center'>Journal entry for {date}</h1>
         </div>
-      </Popup>
-      <Footer exercises={exercises || []} format={weightFormat} />
-    </>
+        <Row>
+          <Col>
+            <JournalEntryBase journalEntry={journalEntry} />
+          </Col>
+        </Row>
+        <Row className='text-center'>
+          <Col>
+            <Button
+              className='btn btn-info'
+              onClick={() => {
+                setOpen((o) => !o);
+              }}
+            >
+              Add Exercise
+            </Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col></Col>
+          <Col xs='10'>
+            <JournalEntryExercisesList journalEntry={journalEntry} />
+          </Col>
+          <Col></Col>
+        </Row>
+        <Popup open={open} onClose={closeModal} closeOnDocumentClick>
+          <div>
+            <button className='float-right' onClick={closeModal}>
+              &times;
+            </button>
+            <ExcerciseForm
+              exercise={defaultExercise}
+              updateExercise={handleExcerciseUpdate}
+            />
+          </div>
+        </Popup>
+        <Footer exercises={exercises || []} format={weightFormat} />
+      </>
+    )
   );
 }
 
