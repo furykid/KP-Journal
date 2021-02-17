@@ -66,7 +66,7 @@ function JournalEntriesPage(props) {
   }
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <img src='./loading.gif' alt='loading...' />;
   }
 
   return (

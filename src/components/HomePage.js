@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import Button from 'react-bootstrap/Button';
 
 function HomePage(props) {
   const {
@@ -54,11 +55,14 @@ function HomePage(props) {
         <div className='jumbotron'>
           <h1> Home Page </h1>
           <div>{user.sub}</div>
-          <button
+          <Button
+            className='btn btn-info'
             onClick={() => {
               props.history.push(`/user/${_userId}`);
             }}
-          />
+          >
+            Open Journal
+          </Button>
           <div>
             {userMetadata ? (
               <pre>{JSON.stringify(userMetadata, null, 2)}</pre>
