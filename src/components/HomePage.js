@@ -19,7 +19,7 @@ function HomePage(props) {
       try {
         const accessToken = await getAccessTokenSilently({
           audience: `https://${domain}/api/v2/`,
-          scope: 'read:current_user',
+          scope: ['read:journalEntries', 'write:journalEntries'],
         });
         const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
         const metadataResponse = await fetch(userDetailsByIdUrl, {
@@ -39,7 +39,6 @@ function HomePage(props) {
 
   function getUserId() {
     if (user) {
-      debugger;
       return user.sub.slice(user.sub.indexOf('|') + 1);
     }
   }
