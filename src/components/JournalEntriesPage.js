@@ -9,11 +9,12 @@ import Button from 'react-bootstrap/Button';
 import Popup from 'reactjs-popup';
 import { toast } from 'react-toastify';
 import { useAuth0 } from '@auth0/auth0-react';
+import loadingImg from './loading.gif';
 
-function JournalEntriesPage(props) {
+function JournalEntriesPage() {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [_userId, setUserId] = useState(null);
 
-  const _userId = props.match.params.userId;
   const _defaultEntry = {
     date: '',
     userId: '',
@@ -41,6 +42,16 @@ function JournalEntriesPage(props) {
     return () => journalEntryStore.removeChangeListener(onChange);
   }, [_userId]);
 
+  useEffect(() => {
+    const getUserId = () => {
+      if (user) {
+        return user.sub.slice(user.sub.indexOf('|') + 1);
+      }
+    };
+
+    setUserId(getUserId());
+  }, [user]);
+
   function onChange() {
     setJournalEntries(journalEntryStore.getJournalEntries());
   }
@@ -66,7 +77,7 @@ function JournalEntriesPage(props) {
   }
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <img src={loadingImg} alt='loading...' />;
   }
 
   return (

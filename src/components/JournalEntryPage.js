@@ -10,8 +10,12 @@ import Button from 'react-bootstrap/Button';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import ExcerciseForm from './ExerciseForm';
+import { useAuth0 } from '@auth0/auth0-react';
+import loadingImg from './loading.gif';
 
 function JournalEntryPage(props) {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const [_userId, setUserId] = useState(null);
   const [open, setOpen] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [date, setDate] = useState('');
@@ -54,11 +58,20 @@ function JournalEntryPage(props) {
   };
 
   useEffect(() => {
+    const getUserId = () => {
+      if (user) {
+        return user.sub.slice(user.sub.indexOf('|') + 1);
+      }
+    };
+
+    setUserId(getUserId());
+  }, [user]);
+
+  useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
-    let userId = props.match.params.userId;
     let entryId = props.match.params.entryId;
     if (journalEntries.length === 0) {
-      journalEntryActions.loadJournalEntries(userId);
+      journalEntryActions.loadJournalEntries(_userId);
     } else if (entryId) {
       let entry = journalEntryStore.getJournalEntry(entryId);
       if (entry) {
@@ -68,12 +81,7 @@ function JournalEntryPage(props) {
       }
     }
     return () => journalEntryStore.removeChangeListener(onChange);
-  }, [
-    props.match.params.userId,
-    props.match.params.entryId,
-    journalEntries,
-    props.history,
-  ]);
+  }, [_userId, props.match.params.entryId, journalEntries, props.history]);
 
   useEffect(() => {
     setDate(new Date(journalEntry.date).toDateString());
@@ -92,49 +100,55 @@ function JournalEntryPage(props) {
     }
   }
 
+  if (isLoading) {
+    return <img src={loadingImg} alt='loading...' />;
+  }
+
   return (
-    <>
-      <div>
-        <div>&nbsp;</div>
-        <h1 className='text-center'>Journal entry for {date}</h1>
-      </div>
-      <Row>
-        <Col>
-          <JournalEntryBase journalEntry={journalEntry} />
-        </Col>
-      </Row>
-      <Row className='text-center'>
-        <Col>
-          <Button
-            className='btn btn-info'
-            onClick={() => {
-              setOpen((o) => !o);
-            }}
-          >
-            Add Exercise
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col></Col>
-        <Col xs='10'>
-          <JournalEntryExercisesList journalEntry={journalEntry} />
-        </Col>
-        <Col></Col>
-      </Row>
-      <Popup open={open} onClose={closeModal} closeOnDocumentClick>
+    isAuthenticated && (
+      <>
         <div>
-          <button className='float-right' onClick={closeModal}>
-            &times;
-          </button>
-          <ExcerciseForm
-            exercise={defaultExercise}
-            updateExercise={handleExcerciseUpdate}
-          />
+          <div>&nbsp;</div>
+          <h1 className='text-center'>Journal entry for {date}</h1>
         </div>
-      </Popup>
-      <Footer exercises={exercises || []} format={weightFormat} />
-    </>
+        <Row>
+          <Col>
+            <JournalEntryBase journalEntry={journalEntry} />
+          </Col>
+        </Row>
+        <Row className='text-center'>
+          <Col>
+            <Button
+              className='btn btn-info'
+              onClick={() => {
+                setOpen((o) => !o);
+              }}
+            >
+              Add Exercise
+            </Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col></Col>
+          <Col xs='10'>
+            <JournalEntryExercisesList journalEntry={journalEntry} />
+          </Col>
+          <Col></Col>
+        </Row>
+        <Popup open={open} onClose={closeModal} closeOnDocumentClick>
+          <div>
+            <button className='float-right' onClick={closeModal}>
+              &times;
+            </button>
+            <ExcerciseForm
+              exercise={defaultExercise}
+              updateExercise={handleExcerciseUpdate}
+            />
+          </div>
+        </Popup>
+        <Footer exercises={exercises || []} format={weightFormat} />
+      </>
+    )
   );
 }
 
