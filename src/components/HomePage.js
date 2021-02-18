@@ -12,7 +12,6 @@ function HomePage(props) {
   } = useAuth0();
 
   const [userMetadata, setUserMetadata] = useState(null);
-  const [_userId, setUserId] = useState(null);
 
   useEffect(() => {
     const getUserMetadata = async () => {
@@ -37,16 +36,6 @@ function HomePage(props) {
     getUserMetadata();
   }, []);
 
-  useEffect(() => {
-    const getUserId = () => {
-      if (user) {
-        return user.sub.slice(user.sub.indexOf('|') + 1);
-      }
-    };
-
-    setUserId(getUserId());
-  }, [user]);
-
   if (isLoading) {
     return <img src={loadingImg} alt='loading...' />;
   }
@@ -54,14 +43,13 @@ function HomePage(props) {
   if (isAuthenticated) {
     return (
       <>
-        <div>{_userId}</div>
         <div className='jumbotron'>
           <h1> Home Page </h1>
           <div>{user.sub}</div>
           <Button
             className='btn btn-info'
             onClick={() => {
-              props.history.push(`/user/${_userId}`);
+              props.history.push(`/journalEntries`);
             }}
           >
             Open Journal

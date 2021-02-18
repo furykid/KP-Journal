@@ -168,7 +168,7 @@
     {
       "id": 2,
       "date": "2020-05-24",
-      "userId": "602c7f5a5fe45c00699a306c",
+      "userId": "602eb9cda514020071fd1b3d",
       "tag": "clean",
       "weightFormat": "kg",
       "sleep": 7,
@@ -258,7 +258,7 @@
       "email": "test@email.com",
       "password": "abc123",
       "accountType": "free",
-      "id": 1,
+      "id": "602eb9cda514020071fd1b3d",
       "weight": 159,
       "height": "5' 5\"",
       "userSince": "2019-05-23"

@@ -14,7 +14,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import loadingImg from './loading.gif';
 
 function JournalEntryPage(props) {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const [_userId, setUserId] = useState(null);
   const [open, setOpen] = useState(false);
   const [exercises, setExercises] = useState([]);
   const [date, setDate] = useState('');
@@ -57,11 +58,20 @@ function JournalEntryPage(props) {
   };
 
   useEffect(() => {
+    const getUserId = () => {
+      if (user) {
+        return user.sub.slice(user.sub.indexOf('|') + 1);
+      }
+    };
+
+    setUserId(getUserId());
+  }, [user]);
+
+  useEffect(() => {
     journalEntryStore.addChangeListener(onChange);
-    let userId = props.match.params.userId;
     let entryId = props.match.params.entryId;
     if (journalEntries.length === 0) {
-      journalEntryActions.loadJournalEntries(userId);
+      journalEntryActions.loadJournalEntries(_userId);
     } else if (entryId) {
       let entry = journalEntryStore.getJournalEntry(entryId);
       if (entry) {
@@ -71,12 +81,7 @@ function JournalEntryPage(props) {
       }
     }
     return () => journalEntryStore.removeChangeListener(onChange);
-  }, [
-    props.match.params.userId,
-    props.match.params.entryId,
-    journalEntries,
-    props.history,
-  ]);
+  }, [_userId, props.match.params.entryId, journalEntries, props.history]);
 
   useEffect(() => {
     setDate(new Date(journalEntry.date).toDateString());

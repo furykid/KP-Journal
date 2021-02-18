@@ -31,9 +31,7 @@ function JournalEntriesList(props) {
                   <Col>
                     <ListGroupItem
                       tag='a'
-                      href={
-                        '/user/' + entry.userId + '/journalEntries/' + entry.id
-                      }
+                      href={'/journalEntry/' + entry.id}
                       action
                     >
                       <ListGroupItemHeading>
