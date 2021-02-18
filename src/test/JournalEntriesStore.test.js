@@ -2,10 +2,6 @@ import EntriesStore from '../stores/journalEntryStore';
 import dispatcher from '../appDispatcher';
 import actionTypes from '../actions/actionTypes';
 
-import { configure } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-configure({ adapter: new Adapter() });
-
 const _journalEntry = {
   id: 1,
   date: '2020-05-23T18:25:43.511Z',
