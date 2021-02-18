@@ -34,7 +34,7 @@ function HomePage(props) {
       }
     };
     getUserMetadata();
-  }, []);
+  }, [getAccessTokenSilently, user.sub]);
 
   if (isLoading) {
     return <img src={loadingImg} alt='loading...' />;
