@@ -6,7 +6,7 @@ export function saveJournalEntry(journalEntry) {
   return journalEntryApi
     .saveJournalEntry(journalEntry)
     .then((savedJournalEntry) => {
-      // Tell the dispatcher to update all the stores that a course was just created
+      // Tell the dispatcher to update all the stores that an entry was just created
       dispatcher.dispatch({
         actionType: actionTypes.CREATE_JOURNAL_ENTRY,
         journalEntry: savedJournalEntry,
