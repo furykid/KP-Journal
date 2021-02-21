@@ -1,23 +1,30 @@
 import { handleResponse, handleError } from './apiUtils';
-const baseUrl = process.env.REACT_APP_API_URL + '/journalEntries/';
+const axios = require('axios').default;
+const baseUrl = process.env.REACT_APP_API_URL + '/journalEntries';
 
 export function getJournalEntries(userId) {
-  return fetch(baseUrl + '?userId=' + userId)
+  return axios
+    .get('journalEntries/' + userId)
     .then(handleResponse)
     .catch(handleError);
+  // return fetch(baseUrl + '?userId=' + userId)
+  //   .then(handleResponse)
+  //   .catch(handleError);
 }
 
 export function saveJournalEntry(journalEntry) {
-  return fetch(baseUrl + (journalEntry.id || ''), {
-    method: journalEntry.id ? 'PUT' : 'POST', // POST for create, PUT to update when id already exists.
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      ...journalEntry,
-      userId: journalEntry.userId,
-    }),
-  })
+  return axios
+    .post('createEntry', journalEntry)
     .then(handleResponse)
     .catch(handleError);
+
+  // return fetch(baseUrl + 'createEntry', {
+  //   method: journalEntry.id ? 'PUT' : 'POST', // POST for create, PUT to update when id already exists.
+  //   headers: { 'content-type': 'application/json' },
+  //   body: JSON.stringify(journalEntry),
+  // })
+  //   .then(handleResponse)
+  //   .catch(handleError);
 }
 
 export function deleteJournalEntry(userId, journalEntryId) {

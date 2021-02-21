@@ -2,7 +2,7 @@
   "name": "kp-journal",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3004",
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@auth0/auth0-react": "^1.2.0",
     "@testing-library/jest-dom": "^5.11.6",
@@ -28,8 +28,8 @@
     "prestart:api": "node src/utility/FakeData/loadFakeData.js",
     "start:dev": "cross-env REACT_APP_API_URL=http://localhost:3004 react-scripts start",
     "start:api": "json-server --watch ./src/utility/FakeData/db.json --port 3004",
-    "start:prod": "cross-env REACT_APP_API_URL=http://localhost:3004 react-scripts start",
-    "start": "run-p start:dev start:api",
+    "start:prod": "cross-env react-scripts start",
+    "start": "run-p start:prod",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import DatePicker from 'react-date-picker';
 
 function JournalEntryForm(props) {
-  let _userId = ~~props.userId;
+  let _userId = props.userId;
   let _weightFormat = 'kg';
   let _entryId = props.journalEntry.id || '';
   let _exercises = props.journalEntry.exercises || [];
