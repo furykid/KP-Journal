@@ -19,7 +19,7 @@ function JournalEntriesList(props) {
           .reverse()
           .map((entry) => {
             return (
-              <ListGroup key={entry.id}>
+              <ListGroup key={entry._id}>
                 <div>&nbsp;</div>
                 <Row>
                   <Button
@@ -31,7 +31,7 @@ function JournalEntriesList(props) {
                   <Col>
                     <ListGroupItem
                       tag='a'
-                      href={'/journalEntry/' + entry.id}
+                      href={'/journalEntry/' + entry._id}
                       action
                     >
                       <ListGroupItemHeading>
@@ -55,7 +55,7 @@ function JournalEntriesList(props) {
                   </Col>
                   <Button
                     className='btn btn-danger float-right'
-                    onClick={() => props.onDeleteEntry(entry.id)}
+                    onClick={() => props.onDeleteEntry(entry._id)}
                   >
                     Delete
                   </Button>

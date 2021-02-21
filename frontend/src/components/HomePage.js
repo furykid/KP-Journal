@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import Button from 'react-bootstrap/Button';
-import loadingImg from './loading.gif';
 
 function HomePage(props) {
   const {
@@ -37,7 +36,7 @@ function HomePage(props) {
   }, [getAccessTokenSilently, user]);
 
   if (isLoading) {
-    return <img src={loadingImg} alt='loading...' />;
+    return <img src='/loading.gif' alt='loading...' />;
   }
 
   if (isAuthenticated) {

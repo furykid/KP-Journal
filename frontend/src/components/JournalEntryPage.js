@@ -11,7 +11,6 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import ExcerciseForm from './ExerciseForm';
 import { useAuth0 } from '@auth0/auth0-react';
-import loadingImg from './loading.gif';
 
 function JournalEntryPage(props) {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -26,7 +25,7 @@ function JournalEntryPage(props) {
   const closeModal = () => setOpen(false);
 
   const [journalEntry, setJournalEntry] = useState({
-    id: 0,
+    _id: '',
     date: '',
     userId: 0,
     tag: '',
@@ -48,7 +47,7 @@ function JournalEntryPage(props) {
   });
 
   const defaultExercise = {
-    id: '',
+    _id: '',
     exercise: '',
     set: '',
     weight: '',
@@ -101,7 +100,7 @@ function JournalEntryPage(props) {
   }
 
   if (isLoading) {
-    return <img src={loadingImg} alt='loading...' />;
+    return <img src='/loading.gif' alt='loading...' />;
   }
 
   return (

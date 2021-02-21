@@ -34,4 +34,15 @@ router.route('/journalEntries/:userId').get((req, res) => {
   );
 });
 
+router.route('/journalEntry/:id').get((req, res) => {
+  const id = req.params.id;
+  console.log(`attempting to find by id: ${id}`);
+  JournalEntry.findById(id).then((foundEntry) => res.json(foundEntry));
+});
+
+router.route('/journalEntry/delete/:id').get((req, res) => {
+  const id = req.params.id;
+  JournalEntry.findByIdAndDelete(id).then((foundEntry) => res.json(foundEntry));
+});
+
 module.exports = router;

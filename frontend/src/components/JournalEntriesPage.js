@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button';
 import Popup from 'reactjs-popup';
 import { toast } from 'react-toastify';
 import { useAuth0 } from '@auth0/auth0-react';
-import loadingImg from './loading.gif';
 
 function JournalEntriesPage() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -77,7 +76,7 @@ function JournalEntriesPage() {
   }
 
   if (isLoading) {
-    return <img src={loadingImg} alt='loading...' />;
+    return <img src='/loading.gif' alt='loading...' />;
   }
 
   return (
