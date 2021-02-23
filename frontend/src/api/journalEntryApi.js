@@ -21,10 +21,3 @@ export function deleteJournalEntry(userId, journalEntryId) {
     .then(handleResponse)
     .catch(handleError);
 }
-
-export function getJournalEntry(entryId) {
-  return axios
-    .get('journalEntry/' + entryId)
-    .then(handleResponse)
-    .catch(handleError);
-}

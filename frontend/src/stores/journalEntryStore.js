@@ -23,7 +23,7 @@ class JournalEntryStore extends EventEmitter {
   }
 
   getJournalEntry(entryId) {
-    return _journalEntries.find((entry) => entry.id === ~~entryId);
+    return _journalEntries.find((entry) => entry._id === entryId);
   }
 }
 
@@ -32,9 +32,11 @@ const store = new JournalEntryStore();
 Dispatcher.register((action) => {
   switch (action.actionType) {
     case actionTypes.CREATE_JOURNAL_ENTRY:
-      if (_journalEntries.find((temp) => action.journalEntry.id === temp.id)) {
+      if (
+        _journalEntries.find((temp) => action.journalEntry._id === temp._id)
+      ) {
         _journalEntries = _journalEntries.map((entry) =>
-          entry.id === action.journalEntry.id ? action.journalEntry : entry
+          entry._id === action.journalEntry._id ? action.journalEntry : entry
         );
       } else {
         _journalEntries.push(action.journalEntry);
@@ -47,7 +49,7 @@ Dispatcher.register((action) => {
       break;
     case actionTypes.DELETE_JOURNAL_ENTRY:
       _journalEntries = _journalEntries.filter(
-        (entry) => entry.id !== ~~action.journalEntryId
+        (entry) => entry._id !== action.journalEntryId
       );
       store.emitChange();
       break;

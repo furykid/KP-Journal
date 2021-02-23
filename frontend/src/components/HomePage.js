@@ -3,12 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Button from 'react-bootstrap/Button';
 
 function HomePage(props) {
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   const [userMetadata, setUserMetadata] = useState(null);
 
@@ -34,10 +29,6 @@ function HomePage(props) {
     };
     getUserMetadata();
   }, [getAccessTokenSilently, user]);
-
-  if (isLoading) {
-    return <img src='/loading.gif' alt='loading...' />;
-  }
 
   if (isAuthenticated) {
     return (

@@ -19,13 +19,10 @@ function App() {
         <Switch>
           <Route path='/' exact component={HomePage} />
           <ProtectedRoute
-            path='/journalEntry/:entryId'
-            component={JournalEntryPage}
-          />
-          <ProtectedRoute
             path='/journalEntries'
             component={JournalEntriesPage}
           />
+          <ProtectedRoute path='/journalEntry' component={JournalEntryPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

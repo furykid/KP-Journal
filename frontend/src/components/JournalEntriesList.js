@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useHistory } from 'react-router-dom';
 import {
   ListGroup,
   ListGroupItem,
@@ -10,6 +11,7 @@ import {
 } from 'reactstrap';
 
 function JournalEntriesList(props) {
+  let history = useHistory();
   return (
     <>
       <div>
@@ -31,7 +33,13 @@ function JournalEntriesList(props) {
                   <Col>
                     <ListGroupItem
                       tag='a'
-                      href={'/journalEntry/' + entry._id}
+                      onClick={() =>
+                        history.push({
+                          pathname: '/journalEntry',
+                          search: '',
+                          state: { entry: entry },
+                        })
+                      }
                       action
                     >
                       <ListGroupItemHeading>

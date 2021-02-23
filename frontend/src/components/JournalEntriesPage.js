@@ -10,8 +10,8 @@ import Popup from 'reactjs-popup';
 import { toast } from 'react-toastify';
 import { useAuth0 } from '@auth0/auth0-react';
 
-function JournalEntriesPage() {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+function JournalEntriesPage(props) {
+  const { user, isAuthenticated } = useAuth0();
   const [_userId, setUserId] = useState(null);
 
   const _defaultEntry = {
@@ -73,10 +73,6 @@ function JournalEntriesPage() {
   function handleEditEntry(entry) {
     setSelectedEntry(entry);
     setOpen(true);
-  }
-
-  if (isLoading) {
-    return <img src='/loading.gif' alt='loading...' />;
   }
 
   return (
