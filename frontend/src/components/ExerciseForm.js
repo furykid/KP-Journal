@@ -28,7 +28,6 @@ function ExerciseForm(props) {
   }
 
   function handleDelete(event) {
-    debugger;
     event.preventDefault();
     props.onDelete(props.exercise.id);
   }
@@ -50,7 +49,7 @@ function ExerciseForm(props) {
       <h1 className='text-center'>Edit</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='exercise'>
-          <Form.Label>Excersise</Form.Label>
+          <Form.Label>Exercise</Form.Label>
           <Form.Control
             autoFocus
             type='text'

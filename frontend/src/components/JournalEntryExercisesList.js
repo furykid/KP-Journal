@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ListGroup,
   ListGroupItem,
@@ -10,6 +10,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import ExcerciseForm from './ExerciseForm';
 import * as journalEntryActions from '../actions/journalEntryActions';
+import journalEntryStore from '../stores/journalEntryStore';
 import { toast } from 'react-toastify';
 
 function JournalEntryExercisesList(props) {
@@ -22,6 +23,7 @@ function JournalEntryExercisesList(props) {
     pr: false,
     notes: '',
   });
+  const [journalEntry, setJouralEntry] = useState(props.journalEntry);
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
 
@@ -51,13 +53,22 @@ function JournalEntryExercisesList(props) {
       });
   }
 
+  useEffect(() => {
+    function onChange() {
+      setJouralEntry(journalEntryStore.getJournalEntry(props.journalEntry._id));
+    }
+    journalEntryStore.addChangeListener(onChange);
+    setJouralEntry(journalEntryStore.getJournalEntry(props.journalEntry._id));
+    return () => journalEntryStore.removeChangeListener(onChange);
+  }, [props.journalEntry]);
+
   return (
     <>
       <div
         className='w-50 p-3 list-inline mx-auto justify-content-center'
         style={scrollStyle}
       >
-        {props.journalEntry.exercises
+        {journalEntry.exercises
           .sort(
             ({ id: previousId }, { id: currentId }) => previousId - currentId
           )
