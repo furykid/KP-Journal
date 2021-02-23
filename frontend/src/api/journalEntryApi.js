@@ -9,16 +9,22 @@ export function getJournalEntries(userId) {
 }
 
 export function saveJournalEntry(journalEntry) {
-  debugger;
-  return axios
-    .post(journalEntry._id === '' ? 'createEntry' : 'updateEntry', journalEntry)
-    .then(handleResponse)
-    .catch(handleError);
+  if (journalEntry._id !== '') {
+    return axios
+      .put('updateEntry', journalEntry)
+      .then(handleResponse)
+      .catch(handleError);
+  } else {
+    return axios
+      .post('createEntry', journalEntry)
+      .then(handleResponse)
+      .catch(handleError);
+  }
 }
 
 export function deleteJournalEntry(userId, journalEntryId) {
   return axios
-    .delete('journalEntry/delete/' + journalEntryId)
+    .delete('deleteEntry/' + journalEntryId)
     .then(handleResponse)
     .catch(handleError);
 }

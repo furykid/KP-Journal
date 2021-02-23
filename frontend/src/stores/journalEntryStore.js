@@ -30,6 +30,8 @@ class JournalEntryStore extends EventEmitter {
 const store = new JournalEntryStore();
 
 Dispatcher.register((action) => {
+  debugger;
+
   switch (action.actionType) {
     case actionTypes.CREATE_JOURNAL_ENTRY:
       if (
