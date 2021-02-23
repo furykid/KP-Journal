@@ -19,7 +19,6 @@ function JournalEntryPage(props) {
   const [weightFormat, setWeightFormat] = useState('');
   const closeModal = () => setOpen(false);
 
-  debugger;
   const journalEntry = props.location.state.entry;
 
   const defaultExercise = {

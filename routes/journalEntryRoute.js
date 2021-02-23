@@ -3,7 +3,6 @@ const router = express.Router();
 const JournalEntry = require('../models/JournalEntryModel');
 
 router.route('/createEntry').post((req, res) => {
-  console.log(`userId = ${req.body.userId}`);
   const date = req.body.date;
   const userId = req.body.userId;
   const tag = req.body.tag;
@@ -27,6 +26,18 @@ router.route('/createEntry').post((req, res) => {
   newJournalEntry.save();
 });
 
+router.route('/updateEntry').put((req, res) => {
+  console.log(`updating ${JSON.stringify(req.body)}`);
+
+  JournalEntry.findOneAndUpdate(
+    { _id: req.body._id },
+    req.body,
+    (updatedEntry) => {
+      res.json(updatedEntry);
+    }
+  );
+});
+
 router.route('/journalEntries/:userId').get((req, res) => {
   const uId = req.params.userId;
   JournalEntry.find({ userId: uId }).then((foundEntries) =>
@@ -34,7 +45,7 @@ router.route('/journalEntries/:userId').get((req, res) => {
   );
 });
 
-router.route('/journalEntry/delete/:id').get((req, res) => {
+router.route('/journalEntry/delete/:id').delete((req, res) => {
   const id = req.params.id;
   JournalEntry.findByIdAndDelete(id).then((foundEntry) => res.json(foundEntry));
 });

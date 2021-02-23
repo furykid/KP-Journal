@@ -28,6 +28,7 @@ function ExerciseForm(props) {
   }
 
   function handleDelete(event) {
+    debugger;
     event.preventDefault();
     props.onDelete(props.exercise.id);
   }

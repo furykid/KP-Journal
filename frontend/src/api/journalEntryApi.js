@@ -9,8 +9,9 @@ export function getJournalEntries(userId) {
 }
 
 export function saveJournalEntry(journalEntry) {
+  debugger;
   return axios
-    .post('createEntry', journalEntry)
+    .post(journalEntry._id === '' ? 'createEntry' : 'updateEntry', journalEntry)
     .then(handleResponse)
     .catch(handleError);
 }
