@@ -10,6 +10,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import ExcerciseForm from './ExerciseForm';
 import * as journalEntryActions from '../actions/journalEntryActions';
+import { toast } from 'react-toastify';
 
 function JournalEntryExercisesList(props) {
   const [activeExercise, setActiveExercise] = useState({
@@ -32,17 +33,22 @@ function JournalEntryExercisesList(props) {
 
   function handleExcerciseUpdate(newExercise) {
     if (newExercise) {
-      journalEntryActions.updateEntryWithNewExercise(
-        props.journalEntry,
-        newExercise
-      );
-      setOpen(false);
+      journalEntryActions
+        .updateEntryWithNewExercise(props.journalEntry, newExercise)
+        .then(() => {
+          toast.success('Exercise saved');
+          setOpen(false);
+        });
     }
   }
 
   function handleExerciseDelete(exerciseId) {
-    journalEntryActions.deleteExercise(props.journalEntry, exerciseId);
-    setOpen(false);
+    journalEntryActions
+      .deleteExercise(props.journalEntry, exerciseId)
+      .then(() => {
+        toast.warn('Entry deleted');
+        setOpen(false);
+      });
   }
 
   return (

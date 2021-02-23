@@ -3,8 +3,6 @@ const router = express.Router();
 const JournalEntry = require('../models/JournalEntryModel');
 
 router.route('/createEntry').post((req, res) => {
-  console.log(`creating ${JSON.stringify(req.body)}`);
-
   const date = req.body.date;
   const userId = req.body.userId;
   const tag = req.body.tag;
@@ -29,7 +27,6 @@ router.route('/createEntry').post((req, res) => {
 });
 
 router.route('/updateEntry').put((req, res) => {
-  console.log(`updating ${JSON.stringify(req.body)}`);
   JournalEntry.findOneAndUpdate(
     { _id: req.body._id },
     req.body,

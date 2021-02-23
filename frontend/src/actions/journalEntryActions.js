@@ -24,7 +24,7 @@ export function deleteExercise(journalEntry, exerciseId) {
     exercises: tempExercises,
   };
 
-  saveJournalEntry(tempEntry);
+  return saveJournalEntry(tempEntry);
 }
 
 export function updateEntryWithNewExercise(journalEntry, newExercise) {
@@ -52,7 +52,7 @@ export function updateEntryWithNewExercise(journalEntry, newExercise) {
     exercises: tempExercises,
   };
 
-  saveJournalEntry(tempEntry);
+  return saveJournalEntry(tempEntry);
 }
 
 export function deleteJournalEntry(userId, journalEntryId) {
