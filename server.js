@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 app.use(cors());
 app.use(express.json());
 
-const uri = ''
+const uri = process.env.DB_ENV;
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
