@@ -6,8 +6,7 @@ const mongoose = require('mongoose');
 app.use(cors());
 app.use(express.json());
 
-const uri =
-  'mongodb+srv://testUser:testuser@cluster0.gmfbh.mongodb.net/KiloProDB';
+const uri = ''
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
